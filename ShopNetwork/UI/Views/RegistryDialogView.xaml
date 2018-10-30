@@ -1,0 +1,62 @@
+﻿<Window x:Class="ShopNetwork.UI.Views.RegistryDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShopNetwork.UI.Views"
+        mc:Ignorable="d"
+        Title="Авторизация" WindowStyle="None" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.RowSpan="3">
+            <Border x:Name="OuterGlow"  Background="Transparent"
+            BorderBrush="#FF314EB0"
+            BorderThickness="2">
+            </Border>
+        </Grid>
+        <Grid Grid.Row="0" Background="#FF314EB0">
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign In" FontSize="14" Padding="0"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Margin="10">
+            <Label Content="E-mail:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <TextBox Name="email" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
+            <Label Content="Password:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <TextBox Name="password" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" BorderThickness="2" Foreground="#FF314EB0" FontSize="16"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="10">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">
+                            <TextBlock Text="Sign In" Foreground="#FF314EB0" 
+                                           HorizontalAlignment="Center"                                           
+                                           Margin="0,5,0,0"
+                                           FontSize="16"></TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Grid.Column="1" Margin="10" IsCancel="True">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
+                            <TextBlock Text="Cansel" Foreground="White" 
+                                           HorizontalAlignment="Center"                                           
+                                           Margin="0,5,0,0"
+                                           FontSize="16"></TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

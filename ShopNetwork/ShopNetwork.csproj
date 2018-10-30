@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{50EE0A77-C433-4332-BA4D-7C6595A90C59}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ShopNetwork</RootNamespace>
+    <AssemblyName>ShopNetwork</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.1.1101, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.4.1.1101\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="DAL\ObservableObject.cs" />
+    <Compile Include="DAL\Repositories\AdminRepository.cs" />
+    <Compile Include="DAL\Repositories\CartRepository.cs" />
+    <Compile Include="DAL\Repositories\DiscountRepository.cs" />
+    <Compile Include="DAL\Repositories\GroupRepository.cs" />
+    <Compile Include="DAL\Repositories\ImageRepository.cs" />
+    <Compile Include="DAL\Repositories\MarketRepository.cs" />
+    <Compile Include="DAL\Repositories\NewsRepository.cs" />
+    <Compile Include="DAL\Repositories\PersonRepository.cs" />
+    <Compile Include="DAL\Repositories\ProductRepository.cs" />
+    <Compile Include="DAL\Repositories\SubGroupRepository.cs" />
+    <Compile Include="DAL\Repositories\UserRepository.cs" />
+    <Compile Include="UI\RelayCommand.cs" />
+    <Compile Include="UI\ViewModels\AboutUsViewModel.cs" />
+    <Compile Include="UI\ViewModels\CartViewModel.cs" />
+    <Compile Include="UI\ViewModels\CatalogViewModel.cs" />
+    <Compile Include="UI\ViewModels\MainViewModel.cs" />
+    <Compile Include="UI\ViewModels\NewsViewModel.cs" />
+    <Compile Include="UI\ViewModels\OurStoresViewModel.cs" />
+    <Compile Include="UI\Views\AboutUsView.xaml.cs">
+      <DependentUpon>AboutUsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CartView.xaml.cs">
+      <DependentUpon>CartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\NewsView.xaml.cs">
+      <DependentUpon>NewsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CatalogView.xaml.cs">
+      <DependentUpon>CatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\OurStoresView.xaml.cs">
+      <DependentUpon>OurStoresView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\RegistryDialogView.xaml.cs">
+      <DependentUpon>RegistryDialogView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="DAL\Resources\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAL\Context\ShopNetworkContext.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UI\Views\AboutUsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\CartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\NewsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\CatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\OurStoresView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\RegistryDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\201810081842249_InitialCreate.cs" />
+    <Compile Include="Migrations\201810081842249_InitialCreate.Designer.cs">
+      <DependentUpon>201810081842249_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810081950335_AddDiscounts.cs" />
+    <Compile Include="Migrations\201810081950335_AddDiscounts.Designer.cs">
+      <DependentUpon>201810081950335_AddDiscounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810082038216_AddCarts.cs" />
+    <Compile Include="Migrations\201810082038216_AddCarts.Designer.cs">
+      <DependentUpon>201810082038216_AddCarts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810122237515_EditImages.cs" />
+    <Compile Include="Migrations\201810122237515_EditImages.Designer.cs">
+      <DependentUpon>201810122237515_EditImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810161419179_SeparationOnAdminAndPerson.cs" />
+    <Compile Include="Migrations\201810161419179_SeparationOnAdminAndPerson.Designer.cs">
+      <DependentUpon>201810161419179_SeparationOnAdminAndPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810161429133_EditPersonAndAdmin.cs" />
+    <Compile Include="Migrations\201810161429133_EditPersonAndAdmin.Designer.cs">
+      <DependentUpon>201810161429133_EditPersonAndAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810161431488_EditAdmin.cs" />
+    <Compile Include="Migrations\201810161431488_EditAdmin.Designer.cs">
+      <DependentUpon>201810161431488_EditAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="DAL\Models\Admin.cs" />
+    <Compile Include="DAL\Models\Cart.cs" />
+    <Compile Include="DAL\Models\Discount.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\Abstract\IGenericRepository.cs" />
+    <Compile Include="DAL\Models\Group.cs" />
+    <Compile Include="DAL\Models\Image.cs" />
+    <Compile Include="DAL\Models\Market.cs" />
+    <Compile Include="DAL\Models\New.cs" />
+    <Compile Include="DAL\Models\Person.cs" />
+    <Compile Include="DAL\Models\Product.cs" />
+    <Compile Include="DAL\Models\SubGroup.cs" />
+    <Compile Include="DAL\Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Migrations\201810081842249_InitialCreate.resx">
+      <DependentUpon>201810081842249_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810081950335_AddDiscounts.resx">
+      <DependentUpon>201810081950335_AddDiscounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810082038216_AddCarts.resx">
+      <DependentUpon>201810082038216_AddCarts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810122237515_EditImages.resx">
+      <DependentUpon>201810122237515_EditImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810161419179_SeparationOnAdminAndPerson.resx">
+      <DependentUpon>201810161419179_SeparationOnAdminAndPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810161429133_EditPersonAndAdmin.resx">
+      <DependentUpon>201810161429133_EditPersonAndAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810161431488_EditAdmin.resx">
+      <DependentUpon>201810161431488_EditAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAL\Resources\Images\Products\" />
+    <Folder Include="DAL\Resources\Images\Users\" />
+    <Folder Include="UI\ViewModels\Commands\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
