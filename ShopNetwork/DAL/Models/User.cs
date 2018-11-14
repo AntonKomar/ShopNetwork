@@ -27,7 +27,7 @@ namespace ShopNetwork.DAL.Models
         [MaxLength(20)]
         public string City { get; set; }
         [Phone]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         [EmailAddress]
         [MaxLength(30)]
         public string Email { get; set; }

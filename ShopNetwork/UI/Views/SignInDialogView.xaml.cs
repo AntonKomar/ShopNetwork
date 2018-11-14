@@ -17,9 +17,9 @@ namespace ShopNetwork.UI.Views
     /// <summary>
     /// Interaction logic for RegistryDialogView.xaml
     /// </summary>
-    public partial class RegistryDialogView : Window
+    public partial class SignInDialogView : Window
     {
-        public RegistryDialogView()
+        public SignInDialogView()
         {
             InitializeComponent();
         }

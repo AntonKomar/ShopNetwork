@@ -1,7 +1,10 @@
 ﻿using ShopNetwork.DAL;
+using ShopNetwork.DAL.Models;
+using ShopNetwork.DAL.Repositories;
 using ShopNetwork.UI.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +21,31 @@ namespace ShopNetwork.UI.ViewModels
         private MainWindow _mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         private string _currentDate;
         private string _time;
+        private GroupRepository groupRepository;
+        private SubGroupRepository subGroupRepository;
 
-        private RelayCommand _closeCommand;
-        private RelayCommand _minimizeCommand;
-        private RelayCommand _maximizeCommand;
-        private RelayCommand _restoreCommand;
-        private RelayCommand _listViewMenu;
-        private RelayCommand _windowLoaded;
-        private RelayCommand _signInCommand;
+        public ObservableCollection<Group> Groups { get; set; }
+        public ObservableCollection<SubGroup> SubGroups { get; set; }
+
+        public MainViewModel(GroupRepository groupRepository, SubGroupRepository subGroupRepository)
+        {
+            this.subGroupRepository = subGroupRepository;
+            this.groupRepository = groupRepository;
+            Groups = groupRepository.Get();
+            SubGroups = subGroupRepository.Get();
+        }
+
+        private RelayCommand closeCommand;
+        private RelayCommand minimizeCommand;
+        private RelayCommand maximizeCommand;
+        private RelayCommand restoreCommand;
+        private RelayCommand listViewMenu;
+        private RelayCommand windowLoaded;
+        private RelayCommand signInCommand;
+        private RelayCommand signUpCommand;
+        private RelayCommand getGroupsCommand;
+        private RelayCommand getSubgroupsCommand;
+
 
         #region Properties
         public string CurrentDate
@@ -54,7 +74,7 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return _windowLoaded ?? (_windowLoaded = new RelayCommand(obj =>
+                return windowLoaded ?? (windowLoaded = new RelayCommand(obj =>
                     {
                         DispatcherTimer dispatcherTimer = new DispatcherTimer();
                         dispatcherTimer.Tick += new EventHandler((object sender,EventArgs e) => 
@@ -67,16 +87,54 @@ namespace ShopNetwork.UI.ViewModels
                     }));
             }
         }
+
         
         public RelayCommand SignInCommand
         {
             get
             {
-                return _signInCommand ??
-                    (_signInCommand = new RelayCommand(obj =>
+                return signInCommand ??
+                    (signInCommand = new RelayCommand(obj =>
                     {
-                        RegistryDialogView dialogBox = new RegistryDialogView();
+                        SignInDialogView dialogBox = new SignInDialogView();
                         dialogBox.ShowDialog();
+                    }));
+            }
+        }
+
+        public RelayCommand SignUpCommand
+        {
+            get
+            {
+                return signUpCommand ??
+                    (signUpCommand = new RelayCommand(obj =>
+                    {
+                        SignUpDialogView dialogBox = new SignUpDialogView();
+                        dialogBox.ShowDialog();
+                    }));
+            }
+        }
+
+        public RelayCommand GetGroupsCommand
+        {
+            get
+            {
+                return getGroupsCommand ??
+                    (getGroupsCommand = new RelayCommand(obj =>
+                    {
+                        Groups.Select(x => x.Name);
+                    }));
+            }
+        }
+
+        public RelayCommand GetSubGroupsCommand
+        {
+            get
+            {
+                return getGroupsCommand ??
+                    (getGroupsCommand = new RelayCommand(obj =>
+                    {
+                        SubGroups.Select(x => x.Name);
                     }));
             }
         }
@@ -85,8 +143,8 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return _closeCommand ??
-                    (_closeCommand = new RelayCommand(obj =>
+                return closeCommand ??
+                    (closeCommand = new RelayCommand(obj =>
                     {
                         Application.Current.Shutdown();
                     }));
@@ -97,8 +155,8 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return _minimizeCommand ?? 
-                    (_minimizeCommand = new RelayCommand(obj =>
+                return minimizeCommand ?? 
+                    (minimizeCommand = new RelayCommand(obj =>
                     {
                         Application.Current.MainWindow.WindowState = WindowState.Minimized;
                     }));
@@ -109,8 +167,8 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return _maximizeCommand ??
-                    (_maximizeCommand = new RelayCommand(obj =>
+                return maximizeCommand ??
+                    (maximizeCommand = new RelayCommand(obj =>
                     {
                         _mainWindow.WindowState = WindowState.Maximized;
                         _mainWindow.MaximizeButton.Visibility = Visibility.Collapsed;
@@ -123,8 +181,8 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return _restoreCommand ??
-                    (_restoreCommand = new RelayCommand(obj =>
+                return restoreCommand ??
+                    (restoreCommand = new RelayCommand(obj =>
                 {
                     _mainWindow.WindowState = WindowState.Normal;
                     _mainWindow.RestoreButton.Visibility = Visibility.Collapsed;
@@ -137,8 +195,8 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return _listViewMenu ?? 
-                    (_listViewMenu = new RelayCommand(obj =>
+                return listViewMenu ?? 
+                    (listViewMenu = new RelayCommand(obj =>
                 {
                     switch ((obj as ListViewItem).Name)
                     {

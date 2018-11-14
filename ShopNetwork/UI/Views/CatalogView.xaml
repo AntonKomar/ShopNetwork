@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopNetwork.UI.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <DataTemplate x:Key="listTemplate">
             <StackPanel Margin="5">
                 <Image Width="100" Height="75" Source="{Binding Path=ImagePath}" />
@@ -15,17 +16,253 @@
                 <TextBlock FontSize="16" Text="{Binding Path=Company}" HorizontalAlignment="Center" />
             </StackPanel>
         </DataTemplate>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     
     <Grid>
-        <TextBlock Text="CatalogView" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ListView x:Name="phonesList" ItemTemplate="{StaticResource listTemplate}" ItemsSource="{Binding Products}"
+        <!--<TextBlock Text="CatalogView" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
+        <!--<ListView x:Name="phonesList" ItemTemplate="{StaticResource listTemplate}" ItemsSource="{Binding Products}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+        </ListView>-->
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel >
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+                <Border Margin="30 30 0 0" BorderBrush="#FF2F6683" BorderThickness="2">
+                <StackPanel  Background="#FF2F6683">
+                    <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                    <Grid Height="60">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Left">
+                            <StackPanel Margin="10" HorizontalAlignment="Left">
+                                <Label Padding="0" Content="Product" FontSize="16"/>
+                                <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                            </StackPanel>
+                        </Grid>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                        <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+                </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+                
+                <Border Margin="30 30 0 0" BorderBrush="#FF2F6683" BorderThickness="2">
+                <StackPanel  Background="#FF2F6683">
+                    <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                    <Grid Height="60">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Left">
+                            <StackPanel Margin="10" HorizontalAlignment="Left">
+                                <Label Padding="0" Content="Product" FontSize="16"/>
+                                <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                            </StackPanel>
+                        </Grid>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                        <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+
+                <Border Margin="30 30 0 0" BorderBrush="#FF2F6683" BorderThickness="2">
+                    <StackPanel  Background="#FF2F6683">
+                        <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                        <Grid Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <StackPanel Margin="10" HorizontalAlignment="Left">
+                                    <Label Padding="0" Content="Product" FontSize="16"/>
+                                    <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+
+                <Border Margin="30 30 0 0" BorderBrush="#FF2F6683" BorderThickness="2">
+                    <StackPanel  Background="#FF2F6683">
+                        <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                        <Grid Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <StackPanel Margin="10" HorizontalAlignment="Left">
+                                    <Label Padding="0" Content="Product" FontSize="16"/>
+                                    <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+                <Border Margin="30 30 0 0" BorderBrush="#FF2F6683" BorderThickness="2">
+                    <StackPanel  Background="#FF2F6683">
+                        <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                        <Grid Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <StackPanel Margin="10" HorizontalAlignment="Left">
+                                    <Label Padding="0" Content="Product" FontSize="16"/>
+                                    <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+                <Border Margin="30 30 0 0" BorderBrush="#FF2F6683" BorderThickness="2">
+                    <StackPanel  Background="#FF2F6683">
+                        <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                        <Grid Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <StackPanel Margin="10" HorizontalAlignment="Left">
+                                    <Label Padding="0" Content="Product" FontSize="16"/>
+                                    <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+
+                <Border Margin="30 30 0 30" BorderBrush="#FF2F6683" BorderThickness="2">
+                    <StackPanel  Background="#FF2F6683">
+                        <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                        <Grid Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <StackPanel Margin="10" HorizontalAlignment="Left">
+                                    <Label Padding="0" Content="Product" FontSize="16"/>
+                                    <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ListViewItem>
+            <ListViewItem Width="200" Padding="0" HorizontalAlignment="Left">
+
+                <Border Margin="30 30 0 30" BorderBrush="#FF2F6683" BorderThickness="2">
+                    <StackPanel  Background="#FF2F6683">
+                        <Image  Height="150" Source="C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\завантаження.jpg" Stretch="UniformToFill"/>
+                        <Grid Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <StackPanel Margin="10" HorizontalAlignment="Left">
+                                    <Label Padding="0" Content="Product" FontSize="16"/>
+                                    <Label Padding="0" Content="265 UAH" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Width="35" Grid.Column="1" Margin="10">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <materialDesign:PackIcon Height="35" Width="35" Kind="PlusCircle" Foreground="#FF20E237"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ListViewItem>
         </ListView>
     </Grid>
 </UserControl>

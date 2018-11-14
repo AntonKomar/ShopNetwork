@@ -13,17 +13,12 @@ namespace ShopNetwork.UI.ViewModels
     public class CatalogViewModel : ObservableObject 
     {
         private Product _product;
-        private UserRepository userRepository;
-        private GroupRepository groupRepository;
-        private SubGroupRepository subGroupRepository;
 
         public ObservableCollection<Product> Products { get; set; }
 
-        public CatalogViewModel(UserRepository userRepository, ProductRepository productRepository, GroupRepository groupRepository,
-            SubGroupRepository subGroupRepository, )
+        public CatalogViewModel(ProductRepository productRepository)
         {
-           
-            //this.Products = productRepository.Get() ; // Where(x => x.ProdID == category.Id).ToList();
+            Products = productRepository.Get(); 
         }
 
         #region Properties
@@ -37,6 +32,15 @@ namespace ShopNetwork.UI.ViewModels
                 OnPropertyChanged("Product");
             }
         }
+
+        #endregion
+
+        
+        private RelayCommand getProductsOfSubroupCommand;
+
+        #region Commands
+
+        
 
         #endregion
     }

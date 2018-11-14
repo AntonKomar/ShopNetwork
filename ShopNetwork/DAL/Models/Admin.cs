@@ -13,6 +13,6 @@ namespace ShopNetwork.DAL.Models
         public int AdminID { get; set; }
         [Required]
         [MaxLength(20)]
-        public int AdminName { get; set; }
+        public string AdminName { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using ShopNetwork.DAL.Context;
+using ShopNetwork.DAL.Repositories;
 using ShopNetwork.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,9 +27,11 @@ namespace ShopNetwork
     {
         public MainWindow()
         {
-            DataContext = new MainViewModel();
+            ShopNetworkContext dbCont = new ShopNetworkContext();
+            GroupRepository gR = new GroupRepository(dbCont);
+            SubGroupRepository sG = new SubGroupRepository(dbCont);
             InitializeComponent();
-            
+            DataContext = new MainViewModel(gR, sG);
         }
 
         

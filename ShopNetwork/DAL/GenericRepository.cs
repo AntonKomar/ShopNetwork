@@ -1,6 +1,7 @@
 ﻿using ShopNetwork.DAL.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -20,14 +21,14 @@ namespace ShopNetwork.DAL
             _dbSet = context.Set<T>();
         }
 
-        public IEnumerable<T> Get()
+        public ObservableCollection<T> Get()
         {
-            return _dbSet.AsNoTracking().ToList();
+            return new ObservableCollection<T>(_dbSet.AsNoTracking().ToList());
         }
 
-        public IEnumerable<T> Get(Func<T, bool> predicate)
+        public ObservableCollection<T> Get(Func<T, bool> predicate)
         {
-            return _dbSet.AsNoTracking().Where(predicate).ToList();
+            return new ObservableCollection<T>(_dbSet.AsNoTracking().Where(predicate).ToList()); 
         }
         public T FindById(int id)
         {

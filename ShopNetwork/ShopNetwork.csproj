@@ -80,7 +80,14 @@
     <Compile Include="DAL\Repositories\PersonRepository.cs" />
     <Compile Include="DAL\Repositories\ProductRepository.cs" />
     <Compile Include="DAL\Repositories\SubGroupRepository.cs" />
-    <Compile Include="DAL\Repositories\UserRepository.cs" />
+    <Compile Include="Migrations\201810301130247_LittleChange.cs" />
+    <Compile Include="Migrations\201810301130247_LittleChange.Designer.cs">
+      <DependentUpon>201810301130247_LittleChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811141213454_Change type of phone.cs" />
+    <Compile Include="Migrations\201811141213454_Change type of phone.Designer.cs">
+      <DependentUpon>201811141213454_Change type of phone.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="UI\ViewModels\AboutUsViewModel.cs" />
     <Compile Include="UI\ViewModels\CartViewModel.cs" />
@@ -88,6 +95,7 @@
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
     <Compile Include="UI\ViewModels\NewsViewModel.cs" />
     <Compile Include="UI\ViewModels\OurStoresViewModel.cs" />
+    <Compile Include="UI\ViewModels\SignUpViewModel.cs" />
     <Compile Include="UI\Views\AboutUsView.xaml.cs">
       <DependentUpon>AboutUsView.xaml</DependentUpon>
     </Compile>
@@ -103,8 +111,11 @@
     <Compile Include="UI\Views\OurStoresView.xaml.cs">
       <DependentUpon>OurStoresView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\RegistryDialogView.xaml.cs">
-      <DependentUpon>RegistryDialogView.xaml</DependentUpon>
+    <Compile Include="UI\Views\SignInDialogView.xaml.cs">
+      <DependentUpon>SignInDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SignUpDialogView.xaml.cs">
+      <DependentUpon>SignUpDialogView.xaml</DependentUpon>
     </Compile>
     <Page Include="DAL\Resources\lang.xaml">
       <SubType>Designer</SubType>
@@ -143,7 +154,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\RegistryDialogView.xaml">
+    <Page Include="UI\Views\SignInDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\SignUpDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +240,12 @@
     <EmbeddedResource Include="Migrations\201810161431488_EditAdmin.resx">
       <DependentUpon>201810161431488_EditAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810301130247_LittleChange.resx">
+      <DependentUpon>201810301130247_LittleChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811141213454_Change type of phone.resx">
+      <DependentUpon>201811141213454_Change type of phone.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -241,7 +262,9 @@
   <ItemGroup>
     <Folder Include="DAL\Resources\Images\Products\" />
     <Folder Include="DAL\Resources\Images\Users\" />
-    <Folder Include="UI\ViewModels\Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DAL\Resources\Images\завантаження.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

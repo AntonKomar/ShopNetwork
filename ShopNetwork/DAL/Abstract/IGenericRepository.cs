@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,8 @@ namespace ShopNetwork.DAL.Abstract
     {
         void Create(T item);
         T FindById(int id);
-        IEnumerable<T> Get();
-        IEnumerable<T> Get(Func<T, bool> predicate);
+        ObservableCollection<T> Get();
+        ObservableCollection<T> Get(Func<T, bool> predicate);
         void Remove(T item);
         void Update(T item);
     }
