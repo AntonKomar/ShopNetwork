@@ -1,4 +1,5 @@
 ﻿using ShopNetwork.DAL;
+using ShopNetwork.DAL.Context;
 using ShopNetwork.DAL.Models;
 using ShopNetwork.DAL.Repositories;
 using ShopNetwork.UI.Views;
@@ -23,14 +24,21 @@ namespace ShopNetwork.UI.ViewModels
         private string _time;
         private GroupRepository groupRepository;
         private SubGroupRepository subGroupRepository;
+        private PersonRepository personRepository;
+        private ShopNetworkContext shopNetworkContext;
+        private User signInUser;
+
+        public EventHandler CloseHandler;
 
         public ObservableCollection<Group> Groups { get; set; }
         public ObservableCollection<SubGroup> SubGroups { get; set; }
 
-        public MainViewModel(GroupRepository groupRepository, SubGroupRepository subGroupRepository)
+        public MainViewModel(ShopNetworkContext dbCont)
         {
-            this.subGroupRepository = subGroupRepository;
-            this.groupRepository = groupRepository;
+            shopNetworkContext = dbCont;
+            subGroupRepository = new SubGroupRepository(dbCont);
+            groupRepository = new GroupRepository(dbCont);
+            personRepository = new PersonRepository(dbCont);
             Groups = groupRepository.Get();
             SubGroups = subGroupRepository.Get();
         }
@@ -42,12 +50,35 @@ namespace ShopNetwork.UI.ViewModels
         private RelayCommand listViewMenu;
         private RelayCommand windowLoaded;
         private RelayCommand signInCommand;
+        private RelayCommand signInConfirmCommand;
         private RelayCommand signUpCommand;
+        private RelayCommand signUpConfirmCommand;
+        private RelayCommand signOutCommand;
+        private RelayCommand signOutConfirmCommand;
         private RelayCommand getGroupsCommand;
         private RelayCommand getSubgroupsCommand;
 
 
         #region Properties
+
+        public User SignInUser
+        {
+            get { return signInUser; }
+            set
+            {
+                signInUser = value;
+                OnPropertyChanged("signInUser");
+            }
+        }
+
+        public IList<Gender> Genders
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
+            }
+        }
+
         public string CurrentDate
         {
             get { return _currentDate; }
@@ -76,6 +107,7 @@ namespace ShopNetwork.UI.ViewModels
             {
                 return windowLoaded ?? (windowLoaded = new RelayCommand(obj =>
                     {
+                        _mainWindow.ContentArea.Content = new NewsView();
                         DispatcherTimer dispatcherTimer = new DispatcherTimer();
                         dispatcherTimer.Tick += new EventHandler((object sender,EventArgs e) => 
                         {
@@ -96,9 +128,47 @@ namespace ShopNetwork.UI.ViewModels
                 return signInCommand ??
                     (signInCommand = new RelayCommand(obj =>
                     {
-                        SignInDialogView dialogBox = new SignInDialogView();
+                        SignInDialogView dialogBox = new SignInDialogView
+                        {
+                            DataContext = this
+                        };
                         dialogBox.ShowDialog();
                     }));
+            }
+        }
+
+        public RelayCommand SignInConfirmCommand
+        {
+            get
+            {
+                return signInConfirmCommand ?? (signInConfirmCommand = new RelayCommand(obj =>
+                {
+                    if (SignInUser == default)
+                    {
+                        SignInDialogView signInView = Application.Current.Windows.OfType<SignInDialogView>().FirstOrDefault();
+                        User user = (from c in personRepository.Get()
+                                     where c.Email == signInView.email.Text
+                                     select c).Single();
+
+                        if (user != null && signInView.password.Text == user.Password)
+                        {
+                            if (user is Admin)
+                            {
+
+                            }
+                            else
+                            {
+                                signInView.Close();
+                                SignInUser = user;
+                                _mainWindow.user.Content = user.Name;
+                                _mainWindow.signIn.Visibility = Visibility.Collapsed;
+                                _mainWindow.signUp.Visibility = Visibility.Collapsed;
+                                _mainWindow.signOut.Visibility = Visibility.Visible;
+                            }
+                        }
+                    }
+
+                }));
             }
         }
 
@@ -109,8 +179,80 @@ namespace ShopNetwork.UI.ViewModels
                 return signUpCommand ??
                     (signUpCommand = new RelayCommand(obj =>
                     {
-                        SignUpDialogView dialogBox = new SignUpDialogView();
+                        SignUpDialogView dialogBox = new SignUpDialogView
+                        {
+                            DataContext = this
+                        };
                         dialogBox.ShowDialog();
+                    }));
+            }
+        }
+
+        public RelayCommand SignUpConfirmCommand
+        {
+            get
+            {
+                return signUpConfirmCommand ?? (signUpConfirmCommand = new RelayCommand(obj =>
+                {
+                    SignUpDialogView signUpView = Application.Current.Windows.OfType<SignUpDialogView>().FirstOrDefault();
+                    Person person = new Person
+                    {
+                        Name = signUpView.name.Text,
+                        LastName = signUpView.lastName.Text,
+                        Gender = (Gender)signUpView.gender.SelectedValue,
+                        City = signUpView.city.Text,
+                        Birth = (DateTime)signUpView.birth.SelectedDate,
+                        DateReg = DateTime.Now,
+                        Email = signUpView.email.Text,
+                        Nickname = signUpView.nick.Text,
+                        Phone = signUpView.phone.Text,
+                        Password = signUpView.password.Password
+                    };
+                    personRepository.Create(person);
+                    signUpView.Close();
+                }));
+            }
+        }
+
+        public RelayCommand SignOutCommand
+        {
+            get
+            {
+                return signOutCommand ??
+                    (signOutCommand = new RelayCommand(obj =>
+                    {
+                        SignOutDialog dialogBox = new SignOutDialog { DataContext = this };
+                        dialogBox.ShowDialog();
+                    }));
+            }
+        }
+
+        public RelayCommand SignOutConfirmCommand
+        {
+            get
+            {
+                return signOutConfirmCommand ??
+                    (signOutConfirmCommand = new RelayCommand(obj =>
+                    {
+                        if (SignInUser != default)
+                        {
+                            _mainWindow.user.Content = "Guest";
+                            _mainWindow.signOut.Visibility = Visibility.Collapsed;
+                            _mainWindow.signIn.Visibility = Visibility.Visible;
+                            _mainWindow.signUp.Visibility = Visibility.Visible;
+                            SignOutDialog signOutView = Application.Current.Windows.OfType<SignOutDialog>().FirstOrDefault();
+                            signOutView.Close();
+
+                            if (SignInUser is Admin)
+                            {
+                                SignInUser = default;
+
+                            }
+                            else
+                            {
+                                SignInUser = default;
+                            }
+                        }
                     }));
             }
         }

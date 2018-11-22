@@ -65,7 +65,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="40 10" Command="{Binding SignUpPersonCommand}">
+            <Button Grid.Column="0" Margin="40 10" Command="{Binding SignUpConfirmCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">

@@ -8,7 +8,9 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1024" MinWidth="650" MinHeight="500" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="600" Width="1024" MinWidth="650" MinHeight="500" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen">
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding WindowLoaded}"/>
@@ -27,19 +29,28 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="2" Background="#FF314EB0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="Shop Network"  VerticalAlignment="Top" Foreground="White" FontSize="18" FontFamily="Segoe UI Symbol"/>
+                <TextBlock Text="Shop Network"  VerticalAlignment="Top" Foreground="White" FontSize="18" 
+                           FontFamily="Segoe UI Symbol"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{Binding MinimizeCommand}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        Command="{Binding MinimizeCommand}" Width="30" Height="30" Padding="0" 
+                        Background="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="WindowMinimize"/>
                 </Button>
-                <Button x:Name="MaximizeButton" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{Binding MaximizeCommand}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button x:Name="MaximizeButton" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        Command="{Binding MaximizeCommand}" Width="30" Height="30" Padding="0" 
+                        Background="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="WindowMaximize"/>
                 </Button>
-                <Button x:Name="RestoreButton" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{Binding RestoreCommand}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Collapsed">
+                <Button x:Name="RestoreButton" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        Command="{Binding RestoreCommand}" Width="30" Height="30" Padding="0" Background="{x:Null}" 
+                        BorderBrush="{x:Null}" Visibility="Collapsed">
                     <materialDesign:PackIcon Kind="WindowRestore" />
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{ Binding CloseCommand}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        Command="{ Binding CloseCommand}" Width="30" Height="30" Padding="0" Background="{x:Null}"
+                        BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="WindowClose"/>
                 </Button>
             </StackPanel>
@@ -56,11 +67,13 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Center">
-                    <Label Content="Guest" Foreground="#FF0D69CD" FontSize="22" Padding="0"/>
+                    <Label Name="user" Content="Guest" Foreground="#FF0D69CD" FontSize="22" Padding="0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <Label HorizontalAlignment="Right" Content="{Binding CurrentDate }" Foreground="#FF0D69CD" FontSize="18" Padding="0"/>
-                    <Label HorizontalAlignment="Right" Content="{Binding Time}" Foreground="#FF0D69CD" FontSize="18" Padding="0"/>
+                    <Label HorizontalAlignment="Right" Content="{Binding CurrentDate }"
+                           Foreground="#FF0D69CD" FontSize="18" Padding="0"/>
+                    <Label HorizontalAlignment="Right" Content="{Binding Time}"
+                           Foreground="#FF0D69CD" FontSize="18" Padding="0"/>
                 </StackPanel>
             </Grid>
             <ListView x:Name="list" Grid.Row="1">
@@ -74,32 +87,41 @@
                 </i:Interaction.Triggers>
                 <ListViewItem x:Name="News" Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LibraryBooks" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="News" Margin="10" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                        <materialDesign:PackIcon Kind="LibraryBooks" Width="30" 
+                                                 Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="News" Margin="10" VerticalAlignment="Center" 
+                                   FontWeight="Bold" FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="Catalog" Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="BookOpen" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Catalog" Margin="10" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                        <materialDesign:PackIcon Kind="BookOpen" Width="30" Height="30" 
+                                                 VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Catalog" Margin="10" VerticalAlignment="Center" 
+                                   FontWeight="Bold" FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="Cart" Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="cart" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="cart" Width="30" Height="30" VerticalAlignment="Center" 
+                                                 Margin="5"/>
                         <TextBlock Text="Cart" Margin="10" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="Stores" Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Our Stores" Margin="10" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                        <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" VerticalAlignment="Center" 
+                                                 Margin="5"/>
+                        <TextBlock Text="Our Stores" Margin="10" VerticalAlignment="Center" FontWeight="Bold" 
+                                   FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="About" Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Information" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="About us" Margin="10" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                        <materialDesign:PackIcon Kind="Information" Width="30" Height="30" 
+                                                 VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="About us" Margin="10" VerticalAlignment="Center" FontWeight="Bold" 
+                                   FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
             </ListView>
@@ -108,7 +130,14 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Margin="5" Command="{Binding SignInCommand}">
+                <Button Name="signOut" Grid.Column="0" Visibility="Collapsed" HorizontalAlignment="Left" Margin="15 0" 
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        Command="{ Binding SignOutCommand }" Width="30" Height="30" Padding="0" 
+                        Background="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Height="30" Width="30" Kind="AccountOff"/>
+                </Button>
+                <Button Name="signIn" Grid.Column="0" Margin="5" 
+                        Command="{Binding SignInCommand}">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">
@@ -120,7 +149,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Grid.Column="1" Margin="5" Command="{Binding SignUpCommand}">
+                <Button Name="signUp" Grid.Column="1" Margin="5" 
+                        Command="{Binding SignUpCommand}">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">

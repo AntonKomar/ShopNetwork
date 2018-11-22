@@ -28,10 +28,11 @@ namespace ShopNetwork
         public MainWindow()
         {
             ShopNetworkContext dbCont = new ShopNetworkContext();
-            GroupRepository gR = new GroupRepository(dbCont);
-            SubGroupRepository sG = new SubGroupRepository(dbCont);
             InitializeComponent();
-            DataContext = new MainViewModel(gR, sG);
+
+            var vm = new MainViewModel(dbCont);
+            DataContext = vm;
+            vm.CloseHandler += (sender, args) => this.Close();
         }
 
         

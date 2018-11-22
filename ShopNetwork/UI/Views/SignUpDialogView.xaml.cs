@@ -13,9 +13,6 @@ namespace ShopNetwork.UI.Views
         public SignUpDialogView()
         {
             InitializeComponent();
-            ShopNetworkContext dbCont = new ShopNetworkContext();
-            PersonRepository personRepository = new PersonRepository(dbCont);
-            DataContext = new SignUpViewModel(personRepository, this);
         }
     }
 }
