@@ -25,10 +25,9 @@ namespace ShopNetwork.UI.ViewModels
         private GroupRepository groupRepository;
         private SubGroupRepository subGroupRepository;
         private PersonRepository personRepository;
+        private PictureRepository pictureRepository;
         private ShopNetworkContext shopNetworkContext;
         private User signInUser;
-
-        public EventHandler CloseHandler;
 
         public ObservableCollection<Group> Groups { get; set; }
         public ObservableCollection<SubGroup> SubGroups { get; set; }
@@ -39,6 +38,7 @@ namespace ShopNetwork.UI.ViewModels
             subGroupRepository = new SubGroupRepository(dbCont);
             groupRepository = new GroupRepository(dbCont);
             personRepository = new PersonRepository(dbCont);
+            pictureRepository = new PictureRepository(dbCont);
             Groups = groupRepository.Get();
             SubGroups = subGroupRepository.Get();
         }
@@ -50,9 +50,7 @@ namespace ShopNetwork.UI.ViewModels
         private RelayCommand listViewMenu;
         private RelayCommand windowLoaded;
         private RelayCommand signInCommand;
-        private RelayCommand signInConfirmCommand;
         private RelayCommand signUpCommand;
-        private RelayCommand signUpConfirmCommand;
         private RelayCommand signOutCommand;
         private RelayCommand signOutConfirmCommand;
         private RelayCommand getGroupsCommand;
@@ -130,45 +128,10 @@ namespace ShopNetwork.UI.ViewModels
                     {
                         SignInDialogView dialogBox = new SignInDialogView
                         {
-                            DataContext = this
+                            DataContext = new SignInViewModel(this, _mainWindow, personRepository)
                         };
                         dialogBox.ShowDialog();
                     }));
-            }
-        }
-
-        public RelayCommand SignInConfirmCommand
-        {
-            get
-            {
-                return signInConfirmCommand ?? (signInConfirmCommand = new RelayCommand(obj =>
-                {
-                    if (SignInUser == default)
-                    {
-                        SignInDialogView signInView = Application.Current.Windows.OfType<SignInDialogView>().FirstOrDefault();
-                        User user = (from c in personRepository.Get()
-                                     where c.Email == signInView.email.Text
-                                     select c).Single();
-
-                        if (user != null && signInView.password.Text == user.Password)
-                        {
-                            if (user is Admin)
-                            {
-
-                            }
-                            else
-                            {
-                                signInView.Close();
-                                SignInUser = user;
-                                _mainWindow.user.Content = user.Name;
-                                _mainWindow.signIn.Visibility = Visibility.Collapsed;
-                                _mainWindow.signUp.Visibility = Visibility.Collapsed;
-                                _mainWindow.signOut.Visibility = Visibility.Visible;
-                            }
-                        }
-                    }
-
-                }));
             }
         }
 
@@ -181,38 +144,13 @@ namespace ShopNetwork.UI.ViewModels
                     {
                         SignUpDialogView dialogBox = new SignUpDialogView
                         {
-                            DataContext = this
+                            DataContext = new SignUpViewModel(personRepository, pictureRepository)
                         };
                         dialogBox.ShowDialog();
                     }));
             }
         }
 
-        public RelayCommand SignUpConfirmCommand
-        {
-            get
-            {
-                return signUpConfirmCommand ?? (signUpConfirmCommand = new RelayCommand(obj =>
-                {
-                    SignUpDialogView signUpView = Application.Current.Windows.OfType<SignUpDialogView>().FirstOrDefault();
-                    Person person = new Person
-                    {
-                        Name = signUpView.name.Text,
-                        LastName = signUpView.lastName.Text,
-                        Gender = (Gender)signUpView.gender.SelectedValue,
-                        City = signUpView.city.Text,
-                        Birth = (DateTime)signUpView.birth.SelectedDate,
-                        DateReg = DateTime.Now,
-                        Email = signUpView.email.Text,
-                        Nickname = signUpView.nick.Text,
-                        Phone = signUpView.phone.Text,
-                        Password = signUpView.password.Password
-                    };
-                    personRepository.Create(person);
-                    signUpView.Close();
-                }));
-            }
-        }
 
         public RelayCommand SignOutCommand
         {

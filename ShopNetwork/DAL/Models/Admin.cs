@@ -11,8 +11,5 @@ namespace ShopNetwork.DAL.Models
     {
         [Key]
         public int AdminID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        public string AdminName { get; set; }
     }
 }

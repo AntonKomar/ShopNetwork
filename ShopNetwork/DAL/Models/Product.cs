@@ -24,7 +24,8 @@ namespace ShopNetwork.DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-        public Image ImageID { get; set; }
+        public Picture PictureID { get; set; }
+        public int Quontity { get; set; }
         public bool IsDiscount { get; set; }
         public Unity UnityOfMeasurement { get; set; }
         

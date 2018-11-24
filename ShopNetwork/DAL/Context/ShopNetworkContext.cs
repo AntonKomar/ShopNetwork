@@ -16,7 +16,7 @@ namespace ShopNetwork.DAL.Context
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
         public DbSet<Market> Markets { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<Admin> Admins { get; set; }

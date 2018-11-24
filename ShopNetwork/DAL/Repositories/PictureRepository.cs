@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace ShopNetwork.DAL.Repositories
 {
-    public class ImageRepository : GenericRepository<Image>
+    public class PictureRepository : GenericRepository<Picture>
     {
-        public ImageRepository(ShopNetworkContext context) : base(context)
+        public PictureRepository(ShopNetworkContext context) : base(context)
         {
 
         }

@@ -21,14 +21,14 @@ namespace ShopNetwork.DAL.Models
         [MaxLength(20)]
         public string LastName { get; set; }
         public Gender Gender { get; set; }
-        public Image ImageID { get; set; }
+        public Picture PictureID { get; set; }
         public DateTime Birth { get; set; }
         public DateTime DateReg { get; set; }
         [MaxLength(20)]
         public string City { get; set; }
-        [Phone]
+       
         public string Phone { get; set; }
-        [EmailAddress]
+        
         [MaxLength(30)]
         public string Email { get; set; }
         [Required]

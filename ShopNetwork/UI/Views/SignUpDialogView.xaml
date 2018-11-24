@@ -6,25 +6,27 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ShopNetwork.UI.Views"
         mc:Ignorable="d"
-        WindowStyle="None" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        WindowStyle="None" SizeToContent="WidthAndHeight" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
-            <RowDefinition/>
+            <RowDefinition Height="310"/>
+            <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.RowSpan="3" Grid.ColumnSpan="2">
+        <Grid Grid.RowSpan="4" Grid.ColumnSpan="2">
             <Border x:Name="OuterGlow"  Background="Transparent"
             BorderBrush="#FF314EB0"
             BorderThickness="2">
             </Border>
         </Grid>
         <Grid Grid.Row="0" Background="#FF314EB0" Grid.ColumnSpan="2">
-            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign Up" FontSize="14" Padding="0"/>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Content="Sign Up" FontSize="14" Padding="0"/>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
             <Label Content="Name:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
@@ -38,10 +40,8 @@
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="Date of birth:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
             <DatePicker Name="birth" Grid.Row="2" MinWidth="250" Padding="2" Height="40" BorderBrush="#FF314EB0" 
-                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
-            <Label Content="Your password:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <PasswordBox Name="password" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
-                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
+                      BorderThickness="2" Foreground="#FF314EB0" FontSize="16"
+                        Focusable="False"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
             <Label Content="Last name:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
@@ -53,14 +53,40 @@
             <Label Content="E-mail:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
             <TextBox Name="email" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
-            <Label Content="Nickname:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="nick" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
-                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
-            <Label Content="Write password again:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <PasswordBox Name="password2" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
-                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
+            <Label Content="Your password:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <PasswordBox Name="password" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+                      BorderThickness="2" Foreground="#FF314EB0" FontSize="16"/>
         </StackPanel>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" Margin="15 0" Grid.Row="2" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Vertical" Margin="0 0 75 0">
+                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageCommand}"  >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
+                                <TextBlock Text="Choose" Foreground="White" 
+                                           HorizontalAlignment="Center"                                           
+                                           Margin="0,5,0,0"
+                                           FontSize="16"></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name="remove" Visibility="Hidden" Grid.Column="1" Width="100" Margin="0 20 0 0" Command="{Binding RemoveImageCommand}"  >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
+                                <TextBlock Text="Remove" Foreground="White" 
+                                           HorizontalAlignment="Center"                                           
+                                           Margin="0,5,0,0"
+                                           FontSize="16"></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <Image Height="100" Width="100" Name="image"/>
+        </StackPanel>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

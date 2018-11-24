@@ -23,12 +23,14 @@
             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign In" FontSize="14" Padding="0"/>
         </Grid>
         <StackPanel Grid.Row="1" Margin="10">
-            <Label Content="E-mail:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="email" Grid.Row="2" MinWidth="250" Padding="2" 
+            
+            <Label Content="E-mail or nickname:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <TextBox Name="email" Grid.Row="2" Width="350"  Padding="2" 
                      BorderBrush="#FF314EB0" BorderThickness="2" Margin="0 0 0 10" 
                      Foreground="#FF314EB0" FontSize="16"/>
+            
             <Label Content="Password:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="password" Grid.Row="2" MinWidth="250" Padding="2" 
+            <PasswordBox Name="password" Grid.Row="2" Width="350" Padding="2" 
                          BorderBrush="#FF314EB0" BorderThickness="2" Foreground="#FF314EB0" 
                          FontSize="16"/>
         </StackPanel>

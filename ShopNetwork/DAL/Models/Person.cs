@@ -11,6 +11,5 @@ namespace ShopNetwork.DAL.Models
     {
         [Key]
         public int PersonID { get; set; }
-        public string Nickname { get; set; }
     }
 }

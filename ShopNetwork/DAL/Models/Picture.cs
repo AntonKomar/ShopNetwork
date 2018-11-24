@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ShopNetwork.DAL.Models
 {
-    public class Image
+    public class Picture
     {
         [Key]
-        public int ImageID { get; set; }
+        public int PictureID { get; set; }
         public string FilePath { get; set; }
     }
 }

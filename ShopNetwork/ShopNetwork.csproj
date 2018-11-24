@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,7 +77,7 @@
     <Compile Include="DAL\Repositories\CartRepository.cs" />
     <Compile Include="DAL\Repositories\DiscountRepository.cs" />
     <Compile Include="DAL\Repositories\GroupRepository.cs" />
-    <Compile Include="DAL\Repositories\ImageRepository.cs" />
+    <Compile Include="DAL\Repositories\PictureRepository.cs" />
     <Compile Include="DAL\Repositories\MarketRepository.cs" />
     <Compile Include="DAL\Repositories\NewsRepository.cs" />
     <Compile Include="DAL\Repositories\PersonRepository.cs" />
@@ -90,6 +91,14 @@
     <Compile Include="Migrations\201811141213454_Change type of phone.Designer.cs">
       <DependentUpon>201811141213454_Change type of phone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811241804019_Add quontity to products.cs" />
+    <Compile Include="Migrations\201811241804019_Add quontity to products.Designer.cs">
+      <DependentUpon>201811241804019_Add quontity to products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811241810267_Remove Nickname and AdminName.cs" />
+    <Compile Include="Migrations\201811241810267_Remove Nickname and AdminName.Designer.cs">
+      <DependentUpon>201811241810267_Remove Nickname and AdminName.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="UI\ViewModels\AboutUsViewModel.cs" />
     <Compile Include="UI\ViewModels\CartViewModel.cs" />
@@ -97,6 +106,7 @@
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
     <Compile Include="UI\ViewModels\NewsViewModel.cs" />
     <Compile Include="UI\ViewModels\OurStoresViewModel.cs" />
+    <Compile Include="UI\ViewModels\SignInViewModel.cs" />
     <Compile Include="UI\ViewModels\SignUpViewModel.cs" />
     <Compile Include="UI\Views\AboutUsView.xaml.cs">
       <DependentUpon>AboutUsView.xaml</DependentUpon>
@@ -208,7 +218,7 @@
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\Abstract\IGenericRepository.cs" />
     <Compile Include="DAL\Models\Group.cs" />
-    <Compile Include="DAL\Models\Image.cs" />
+    <Compile Include="DAL\Models\Picture.cs" />
     <Compile Include="DAL\Models\Market.cs" />
     <Compile Include="DAL\Models\New.cs" />
     <Compile Include="DAL\Models\Person.cs" />
@@ -255,6 +265,12 @@
     <EmbeddedResource Include="Migrations\201811141213454_Change type of phone.resx">
       <DependentUpon>201811141213454_Change type of phone.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811241804019_Add quontity to products.resx">
+      <DependentUpon>201811241804019_Add quontity to products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811241810267_Remove Nickname and AdminName.resx">
+      <DependentUpon>201811241810267_Remove Nickname and AdminName.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -274,6 +290,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="DAL\Resources\Images\завантаження.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DAL\Resources\Images\no-photo-available.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

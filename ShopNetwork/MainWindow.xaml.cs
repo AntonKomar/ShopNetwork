@@ -32,7 +32,6 @@ namespace ShopNetwork
 
             var vm = new MainViewModel(dbCont);
             DataContext = vm;
-            vm.CloseHandler += (sender, args) => this.Close();
         }
 
         
