@@ -15,6 +15,7 @@ namespace ShopNetwork.DAL.Models
         [MaxLength(20)]
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime Date { get; set; }
         public Picture PictureID { get; set; }
 
     }

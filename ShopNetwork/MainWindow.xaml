@@ -10,15 +10,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1024" MinWidth="650" MinHeight="500" WindowStyle="None" 
         WindowStartupLocation="CenterScreen">
-    
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding WindowLoaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-
-    <Grid>
+    <Grid Grid.ZIndex="3">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="1"/>
+        </Grid.Effect>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition/>
@@ -27,6 +30,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0" Grid.Column="2" Background="#FF314EB0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Shop Network"  VerticalAlignment="Top" Foreground="White" FontSize="18" 
@@ -61,7 +65,9 @@
                 <RowDefinition/>
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
+
             <Grid Grid.Row="0"  Background="#FFF4F3C3">
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -76,7 +82,7 @@
                            Foreground="#FF0D69CD" FontSize="18" Padding="0"/>
                 </StackPanel>
             </Grid>
-            <ListView x:Name="list" Grid.Row="1">
+            <ListView x:Name="list" Grid.Row="1" Foreground="#DDFCF9F9">
 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -85,21 +91,41 @@
                                  CommandParameter="{Binding ElementName=list,Path=SelectedItem}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ListViewItem x:Name="News" Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LibraryBooks" Width="30" 
+                <ListViewItem x:Name="News" Height="60" Selected="News_Selected">
+                    <Grid Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="LibraryBooks" Width="30" 
                                                  Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="News" Margin="10" VerticalAlignment="Center" 
+                            <TextBlock Text="News" Margin="10" VerticalAlignment="Center" 
                                    FontWeight="Bold" FontSize="16"/>
-                    </StackPanel>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right">
+                            <materialDesign:PopupBox Name="addNews" Visibility="Collapsed" Width="30" Height="30" VerticalAlignment="Center" Margin="0 5"
+                                                     PlacementMode="RightAndAlignMiddles" StaysOpen="False">
+                                <StackPanel>
+                                    <Button Command="{Binding AddNewsCommand}" Content="Add"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </Grid>
                 </ListViewItem>
                 <ListViewItem x:Name="Catalog" Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="BookOpen" Width="30" Height="30" 
+                    <Grid Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookOpen" Width="30" Height="30" 
                                                  VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Catalog" Margin="10" VerticalAlignment="Center" 
+                            <TextBlock Text="Catalog" Margin="10" VerticalAlignment="Center" 
                                    FontWeight="Bold" FontSize="16"/>
-                    </StackPanel>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right">
+                            <materialDesign:PopupBox Name="addProduct" Visibility="Collapsed" Width="30" Height="30" VerticalAlignment="Center" Margin="0 5"
+                                                     PlacementMode="RightAndAlignMiddles" StaysOpen="False">
+                                <StackPanel>
+                                    <Button Command="{Binding AddProductCommand}" Content="Add"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </Grid>
                 </ListViewItem>
                 <ListViewItem x:Name="Cart" Height="60">
                     <StackPanel Orientation="Horizontal">
@@ -109,18 +135,36 @@
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="Stores" Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" VerticalAlignment="Center" 
+                    <Grid Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" VerticalAlignment="Center" 
                                                  Margin="5"/>
-                        <TextBlock Text="Our Stores" Margin="10" VerticalAlignment="Center" FontWeight="Bold" 
+                            <TextBlock Text="Our Stores" Margin="10" VerticalAlignment="Center" FontWeight="Bold" 
                                    FontSize="16"/>
-                    </StackPanel>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right">
+                            <materialDesign:PopupBox Name="addStore" Visibility="Collapsed" Width="30" Height="30" VerticalAlignment="Center" Margin="0 5"
+                                                     PlacementMode="RightAndAlignMiddles" StaysOpen="False">
+                                <StackPanel>
+                                    <Button Command="{Binding AddStoreCommand}" Content="Add"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </Grid>
                 </ListViewItem>
                 <ListViewItem x:Name="About" Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Information" Width="30" Height="30" 
                                                  VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="About us" Margin="10" VerticalAlignment="Center" FontWeight="Bold" 
+                                   FontSize="16"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="Admin" Height="60" Background="#FF2BD400" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountPlus" Width="30" Height="30" 
+                                                 VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Add Admin" Margin="10" VerticalAlignment="Center" FontWeight="Bold" 
                                    FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
@@ -164,7 +208,7 @@
                 </Button>
             </Grid>
         </Grid>
-        
+
         <ContentControl x:Name="ContentArea" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -29,12 +29,14 @@ namespace ShopNetwork
         {
             ShopNetworkContext dbCont = new ShopNetworkContext();
             InitializeComponent();
-
-            var vm = new MainViewModel(dbCont);
-            DataContext = vm;
+            
+            DataContext = new MainViewModel(dbCont);
         }
 
-        
+        private void News_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     
 }

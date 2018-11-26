@@ -11,7 +11,6 @@ namespace ShopNetwork.DAL.Models
     {
         [Key]
         public int PriceID { get; set; }
-        public Product ProdID { get; set; }
         public int Price { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }

@@ -99,6 +99,14 @@
     <Compile Include="Migrations\201811241810267_Remove Nickname and AdminName.Designer.cs">
       <DependentUpon>201811241810267_Remove Nickname and AdminName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811262239002_Add Date to News.cs" />
+    <Compile Include="Migrations\201811262239002_Add Date to News.Designer.cs">
+      <DependentUpon>201811262239002_Add Date to News.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811262310422_Edit discount.cs" />
+    <Compile Include="Migrations\201811262310422_Edit discount.Designer.cs">
+      <DependentUpon>201811262310422_Edit discount.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="UI\ViewModels\AboutUsViewModel.cs" />
     <Compile Include="UI\ViewModels\CartViewModel.cs" />
@@ -110,6 +118,15 @@
     <Compile Include="UI\ViewModels\SignUpViewModel.cs" />
     <Compile Include="UI\Views\AboutUsView.xaml.cs">
       <DependentUpon>AboutUsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\AddNewsDialog.xaml.cs">
+      <DependentUpon>AddNewsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\AddProductDialog.xaml.cs">
+      <DependentUpon>AddProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\AddStoreDialog.xaml.cs">
+      <DependentUpon>AddStoreDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\CartView.xaml.cs">
       <DependentUpon>CartView.xaml</DependentUpon>
@@ -150,6 +167,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\Views\AboutUsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\AddNewsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\AddProductDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\AddStoreDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -271,6 +300,12 @@
     <EmbeddedResource Include="Migrations\201811241810267_Remove Nickname and AdminName.resx">
       <DependentUpon>201811241810267_Remove Nickname and AdminName.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811262239002_Add Date to News.resx">
+      <DependentUpon>201811262239002_Add Date to News.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811262310422_Edit discount.resx">
+      <DependentUpon>201811262310422_Edit discount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -285,6 +320,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DAL\Resources\Images\News\" />
     <Folder Include="DAL\Resources\Images\Products\" />
     <Folder Include="DAL\Resources\Images\Users\" />
   </ItemGroup>
@@ -292,7 +328,7 @@
     <Resource Include="DAL\Resources\Images\завантаження.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="DAL\Resources\Images\no-photo-available.png" />
+    <Resource Include="DAL\Resources\Images\Default\no-photo-available.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

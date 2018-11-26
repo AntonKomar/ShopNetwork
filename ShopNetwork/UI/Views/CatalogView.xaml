@@ -17,8 +17,8 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>-->
-    
-    <Grid>
+
+    <Grid Background="White">
         <!--<TextBlock Text="CatalogView" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
         <!--<ListView x:Name="phonesList" ItemTemplate="{StaticResource listTemplate}" ItemsSource="{Binding Products}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">

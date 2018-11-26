@@ -16,19 +16,24 @@ namespace ShopNetwork.UI.ViewModels
     {
         private PersonRepository personRepository;
         private PictureRepository pictureRepository;
-        private string imagePath = null;
-        private string imageName = null;
-        private string destPath = @"C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\Users\";
+        private AdminRepository adminRepository;
+        private string imagePath;
+        private string imageName;
+        private bool isAdmin;
+        private readonly string destPath = @"C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\Users\";
         private SignUpDialogView signUpView;
 
         private RelayCommand signUpConfirmCommand;
         private RelayCommand chooseImageCommand;
         private RelayCommand removeImageCommand;
 
-        public SignUpViewModel(PersonRepository personRepository, PictureRepository pictureRepository)
+        public SignUpViewModel(PersonRepository personRepository, PictureRepository pictureRepository,
+            AdminRepository adminRepository = default, bool isAdmin = false)
         {
             this.personRepository = personRepository;
             this.pictureRepository = pictureRepository;
+            this.isAdmin = isAdmin;
+            this.adminRepository = adminRepository;
             signUpView = Application.Current.Windows.OfType<SignUpDialogView>().FirstOrDefault();
         }
 
@@ -48,7 +53,8 @@ namespace ShopNetwork.UI.ViewModels
                     (chooseImageCommand = new RelayCommand(obj =>
                     {
                         var openDialog = new OpenFileDialog();
-                        openDialog.Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf";
+                        openDialog.Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;" +
+                        "*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf";
 
                         if (openDialog.ShowDialog() == true)
                         {
@@ -83,7 +89,7 @@ namespace ShopNetwork.UI.ViewModels
             {
                 return signUpConfirmCommand ?? (signUpConfirmCommand = new RelayCommand(obj =>
                 {
-                    Person person = new Person();
+                    User user = new Person();
 
                     if (imagePath != null)
                     {
@@ -91,19 +97,23 @@ namespace ShopNetwork.UI.ViewModels
                         Picture picture = new Picture();
                         picture.FilePath = destPath+imageName;
                         pictureRepository.Create(picture);
-                        person.PictureID = picture;
+                        user.PictureID = picture;
                     }
 
-                    person.Name = signUpView.name.Text;
-                    person.LastName = signUpView.lastName.Text;
-                    person.Gender = (Gender)signUpView.gender.SelectedValue;
-                    person.City = signUpView.city.Text;
-                    person.Birth = (DateTime)signUpView.birth.SelectedDate;
-                    person.DateReg = DateTime.Now;
-                    person.Email = signUpView.email.Text;
-                    person.Phone = signUpView.phone.Text;
-                    person.Password = signUpView.password.Password;
-                    personRepository.Create(person);
+                    user.Name = signUpView.name.Text;
+                    user.LastName = signUpView.lastName.Text;
+                    user.Gender = (Gender)signUpView.gender.SelectedValue;
+                    user.City = signUpView.city.Text;
+                    user.Birth = (DateTime)signUpView.birth.SelectedDate;
+                    user.DateReg = DateTime.Now;
+                    user.Email = signUpView.email.Text;
+                    user.Phone = signUpView.phone.Text;
+                    user.Password = signUpView.password.Password;
+                    if (isAdmin == true)
+                        adminRepository.Create((Admin)user);
+                    else
+                        personRepository.Create((Person)user);
+
                     signUpView.Close();
                 }));
             }

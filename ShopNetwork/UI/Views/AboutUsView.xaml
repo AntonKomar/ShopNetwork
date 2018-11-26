@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ShopNetwork.UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="White">
         <ListView VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <TextBlock Margin="20 20 0 0" TextWrapping="WrapWithOverflow" Text="{DynamicResource AboutUs}" Foreground="Black" FontSize="28" FontFamily="Nirmala UI Semilight" FontWeight="Bold"/>
             <TextBlock Margin="20 0 0 0" TextWrapping="WrapWithOverflow" Text="{DynamicResource AboutUs1}" Foreground="Black" FontSize="24" FontFamily="Nirmala UI Semilight" FontWeight="Bold"/>

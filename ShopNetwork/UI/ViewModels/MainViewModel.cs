@@ -24,9 +24,10 @@ namespace ShopNetwork.UI.ViewModels
         private string _time;
         private GroupRepository groupRepository;
         private SubGroupRepository subGroupRepository;
-        private PersonRepository personRepository;
-        private PictureRepository pictureRepository;
-        private ShopNetworkContext shopNetworkContext;
+        private readonly PersonRepository personRepository;
+        private readonly PictureRepository pictureRepository;
+        private readonly AdminRepository adminRepository;
+        private readonly ShopNetworkContext shopNetworkContext;
         private User signInUser;
 
         public ObservableCollection<Group> Groups { get; set; }
@@ -39,6 +40,7 @@ namespace ShopNetwork.UI.ViewModels
             groupRepository = new GroupRepository(dbCont);
             personRepository = new PersonRepository(dbCont);
             pictureRepository = new PictureRepository(dbCont);
+            adminRepository = new AdminRepository(dbCont);
             Groups = groupRepository.Get();
             SubGroups = subGroupRepository.Get();
         }
@@ -128,7 +130,7 @@ namespace ShopNetwork.UI.ViewModels
                     {
                         SignInDialogView dialogBox = new SignInDialogView
                         {
-                            DataContext = new SignInViewModel(this, _mainWindow, personRepository)
+                            DataContext = new SignInViewModel(this, _mainWindow, personRepository, adminRepository)
                         };
                         dialogBox.ShowDialog();
                     }));
@@ -181,15 +183,16 @@ namespace ShopNetwork.UI.ViewModels
                             SignOutDialog signOutView = Application.Current.Windows.OfType<SignOutDialog>().FirstOrDefault();
                             signOutView.Close();
 
-                            if (SignInUser is Admin)
+                            if (SignInUser.GetType() == typeof(Admin))
                             {
-                                SignInUser = default;
+                                _mainWindow.Admin.Visibility = Visibility.Collapsed;
+                                _mainWindow.addNews.Visibility = Visibility.Collapsed;
+                                _mainWindow.addProduct.Visibility = Visibility.Collapsed;
+                                _mainWindow.addStore.Visibility = Visibility.Collapsed;
+                            }
+                            SignInUser = default;
+                            
 
-                            }
-                            else
-                            {
-                                SignInUser = default;
-                            }
                         }
                     }));
             }
@@ -294,6 +297,13 @@ namespace ShopNetwork.UI.ViewModels
                             break;
                         case "About":
                             _mainWindow.ContentArea.Content = new AboutUsView();
+                            break;
+                        case "Admin":
+                            SignUpDialogView dialogBox = new SignUpDialogView
+                            {
+                                DataContext = new SignUpViewModel(personRepository, pictureRepository,adminRepository, true)
+                            };
+                            dialogBox.ShowDialog();
                             break;
                         default:
                             break;

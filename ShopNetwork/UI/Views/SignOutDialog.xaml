@@ -20,7 +20,7 @@
             </Border>
         </Grid>
         <Grid Grid.Row="0" Background="#FF314EB0">
-            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign Out" FontSize="14" Padding="0"/>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign Out" FontSize="14" Padding="0" Foreground="#DDFFFFFF"/>
         </Grid>
         <StackPanel Grid.Row="1" Margin="10">
             <Label Margin="20 10" Content="Are you sure you want to exit?" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
