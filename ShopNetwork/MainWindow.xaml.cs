@@ -31,12 +31,7 @@ namespace ShopNetwork
             InitializeComponent();
             
             DataContext = new MainViewModel(dbCont);
-        }
-
-        private void News_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
+        } 
     }
     
 }

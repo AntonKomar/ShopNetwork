@@ -29,8 +29,27 @@
                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16" Width="480"/>
             <Label Content="Description:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
             <TextBox Name="descript" AcceptsReturn="True" TextWrapping = "Wrap" Grid.Row="2" Width="480" 
-                     Padding="2" BorderBrush="#FF314EB0" Height="130"
+                     Padding="2" BorderBrush="#FF314EB0" Height="100"
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <Label Content="Quontity:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <TextBox Name="quontity" TextWrapping = "Wrap" Padding="2" BorderBrush="#FF314EB0" 
+                     BorderThickness="2" Margin="0 0 10 10" Foreground="#FF314EB0" FontSize="16"/>
+                    <Label Content="Measurement unity:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <ComboBox Name="unity" Padding="10" BorderBrush="#FF314EB0"
+                     BorderThickness="2" Margin="0 0 10 10" Foreground="#FF314EB0" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="10 0 0 10">
+                    <Label Content="Price:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <TextBox Name="price" TextWrapping = "Wrap" Padding="2" BorderBrush="#FF314EB0" 
+                     BorderThickness="2" Foreground="#FF314EB0" FontSize="16"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="15 0" Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical" Margin="0 0 75 0">

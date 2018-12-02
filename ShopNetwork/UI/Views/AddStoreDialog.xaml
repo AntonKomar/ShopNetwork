@@ -3,10 +3,67 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ShopNetwork.UI.Views"
         mc:Ignorable="d"
-        Title="AddStoreDialog" Height="450" Width="800">
+        WindowStyle="None" SizeToContent="WidthAndHeight" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.RowSpan="4" Grid.ColumnSpan="2">
+            <Border x:Name="OuterGlow"  Background="Transparent"
+            BorderBrush="#FF314EB0"
+            BorderThickness="2"/>
+        </Grid>
+        <Grid Grid.Row="0" Background="#FF314EB0" Grid.ColumnSpan="2">
+            <Label HorizontalAlignment="Center" Margin="0 3" VerticalAlignment="Center" 
+                   Content="Add Stores" FontSize="14" Padding="0" Foreground="#DDFFFFFF"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+            <Label Content="City:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <TextBox Name="city" TextWrapping = "Wrap" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+                     BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16" Width="480"/>
+            <Label Content="Street:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <TextBox Name="street" AcceptsReturn="True" TextWrapping = "Wrap" Grid.Row="2" Width="480" 
+                     Padding="2" BorderBrush="#FF314EB0"
+                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
+            <Label Content="House №:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+            <TextBox Name="house" AcceptsReturn="True" TextWrapping = "Wrap" Grid.Row="2" Width="480" 
+                     Padding="2" BorderBrush="#FF314EB0"
+                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
+        </StackPanel>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="40 10" Command="{Binding SignUpConfirmCommand}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">
+                            <TextBlock Text="Sign Up" Foreground="#FF314EB0" 
+                                           HorizontalAlignment="Center"                                           
+                                           Margin="0,5,0,0"
+                                           FontSize="16"></TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Grid.Column="1" Margin="40 10" IsCancel="True">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
+                            <TextBlock Text="Cansel" Foreground="White" 
+                                           HorizontalAlignment="Center"                                           
+                                           Margin="0,5,0,0"
+                                           FontSize="16"></TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

@@ -91,7 +91,7 @@
                                  CommandParameter="{Binding ElementName=list,Path=SelectedItem}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ListViewItem x:Name="News" Height="60" Selected="News_Selected">
+                <ListViewItem x:Name="News" Height="60" >
                     <Grid Width="200">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="LibraryBooks" Width="30" 
