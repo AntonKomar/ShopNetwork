@@ -118,8 +118,6 @@
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
     <Compile Include="UI\ViewModels\NewsViewModel.cs" />
     <Compile Include="UI\ViewModels\OurStoresViewModel.cs" />
-    <Compile Include="UI\ViewModels\SignInViewModel.cs" />
-    <Compile Include="UI\ViewModels\SignUpViewModel.cs" />
     <Compile Include="UI\Views\AboutUsView.xaml.cs">
       <DependentUpon>AboutUsView.xaml</DependentUpon>
     </Compile>

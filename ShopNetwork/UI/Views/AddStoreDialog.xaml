@@ -40,11 +40,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="40 10" Command="{Binding SignUpConfirmCommand}">
+            <Button Grid.Column="0" Margin="40 10" Command="{Binding AddStoreConfirmCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">
-                            <TextBlock Text="Sign Up" Foreground="#FF314EB0" 
+                            <TextBlock Text="Add" Foreground="#FF314EB0" 
                                            HorizontalAlignment="Center"                                           
                                            Margin="0,5,0,0"
                                            FontSize="16"></TextBlock>

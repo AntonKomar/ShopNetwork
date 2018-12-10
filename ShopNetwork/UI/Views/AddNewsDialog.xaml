@@ -34,7 +34,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="15 0" Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical" Margin="0 0 75 0">
-                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageCommand}"  >
+                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageNewsCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
@@ -46,7 +46,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Name="remove" Visibility="Hidden" Grid.Column="1" Width="100" Margin="0 20 0 0" Command="{Binding RemoveImageCommand}"  >
+                <Button Name="remove" Visibility="Hidden" Grid.Column="1" Width="100" Margin="0 20 0 0" Command="{Binding RemoveImageNewsCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
@@ -66,11 +66,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="40 10" Command="{Binding SignUpConfirmCommand}">
+            <Button Grid.Column="0" Margin="40 10" Command="{Binding AddNewsConfirmCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">
-                            <TextBlock Text="Sign Up" Foreground="#FF314EB0" 
+                            <TextBlock Text="Add" Foreground="#FF314EB0" 
                                            HorizontalAlignment="Center"                                           
                                            Margin="0,5,0,0"
                                            FontSize="16"></TextBlock>

@@ -30,36 +30,36 @@
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
             <Label Content="Name:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="name" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+            <TextBox Name="name" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="Gender:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
             <ComboBox Name="gender" ItemsSource="{Binding Genders}" Grid.Row="2" MinWidth="250" Padding="10" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="Phone:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="phone" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+            <TextBox Name="phone" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="Date of birth:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <DatePicker Name="birth" Grid.Row="2" MinWidth="250" Padding="2" Height="40" BorderBrush="#FF314EB0" 
+            <DatePicker Name="birth" MinWidth="250" Padding="2" Height="40" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Foreground="#FF314EB0" FontSize="16"
                         Focusable="False"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
             <Label Content="Last name:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="lastName" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+            <TextBox Name="lastName" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="City:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="city" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+            <TextBox Name="city" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="E-mail:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <TextBox Name="email" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+            <TextBox Name="email" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Label Content="Your password:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
-            <PasswordBox Name="password" Grid.Row="2" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
+            <PasswordBox Name="password" MinWidth="250" Padding="2" BorderBrush="#FF314EB0" 
                       BorderThickness="2" Foreground="#FF314EB0" FontSize="16"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="15 0" Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical" Margin="0 0 75 0">
-                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageCommand}"  >
+                <Button Width="100" Command="{Binding ChooseImageSignUpCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
@@ -71,7 +71,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Name="remove" Visibility="Hidden" Grid.Column="1" Width="100" Margin="0 20 0 0" Command="{Binding RemoveImageCommand}"  >
+                <Button Name="remove" Visibility="Hidden" Width="100" Margin="0 20 0 0" 
+                        Command="{Binding RemoveImageSignUpCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">

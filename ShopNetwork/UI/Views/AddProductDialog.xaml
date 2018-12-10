@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="520"/>
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -29,31 +29,57 @@
                      BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16" Width="480"/>
             <Label Content="Description:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
             <TextBox Name="descript" AcceptsReturn="True" TextWrapping = "Wrap" Grid.Row="2" Width="480" 
-                     Padding="2" BorderBrush="#FF314EB0" Height="100"
+                     Padding="2" BorderBrush="#FF314EB0" Height="70"
                       BorderThickness="2" Margin="0 0 0 10" Foreground="#FF314EB0" FontSize="16"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <Label Content="Quontity:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0 0 10 10">
+                    <Label Content="Group:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <ComboBox Name="group" Padding="10" BorderBrush="#FF314EB0"
+                     BorderThickness="2" Foreground="#FF314EB0" FontSize="16"
+                              ItemsSource="{Binding Groups }"
+                              DisplayMemberPath="Name"
+                              SelectedItem="{Binding SelectedGroup}"/>
+                    <Label Content="Quantity:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
                     <TextBox Name="quontity" TextWrapping = "Wrap" Padding="2" BorderBrush="#FF314EB0" 
-                     BorderThickness="2" Margin="0 0 10 10" Foreground="#FF314EB0" FontSize="16"/>
-                    <Label Content="Measurement unity:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                     BorderThickness="2" Foreground="#FF314EB0" FontSize="16"/>
+                    <Label Content="Measurement unit:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
                     <ComboBox Name="unity" Padding="10" BorderBrush="#FF314EB0"
-                     BorderThickness="2" Margin="0 0 10 10" Foreground="#FF314EB0" FontSize="16"/>
+                     BorderThickness="2" Foreground="#FF314EB0" FontSize="16"
+                              ItemsSource="{Binding Units}"/>
+                    <Label Content="Start of the discount:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <DatePicker Name="dateStart" Padding="2" Height="40" BorderBrush="#FF314EB0" 
+                      BorderThickness="2" Foreground="#FF314EB0" FontSize="16"
+                        Focusable="False" IsEnabled="{Binding IsDiscount}"/>
+                    <Label Content="New price:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <TextBox Name="newPrice" TextWrapping = "Wrap" Padding="2" BorderBrush="#FF314EB0" 
+                     BorderThickness="2" Foreground="#FF314EB0" FontSize="16" IsEnabled="{Binding IsDiscount}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="10 0 0 10">
+                    <Label Content="Subgroup:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <ComboBox Name="subGroup" Padding="10" BorderBrush="#FF314EB0"
+                     BorderThickness="2" Foreground="#FF314EB0" FontSize="16" IsEnabled="False" 
+                              ItemsSource="{Binding SubGroups, NotifyOnSourceUpdated=True}" DisplayMemberPath="Name"/>
                     <Label Content="Price:" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
                     <TextBox Name="price" TextWrapping = "Wrap" Padding="2" BorderBrush="#FF314EB0" 
                      BorderThickness="2" Foreground="#FF314EB0" FontSize="16"/>
+                    <StackPanel Orientation="Horizontal" Margin="0 25 0 0">
+                        <Label Content="Discount:" Foreground="#FF314EB0" Padding="0" Margin="0 0 15 0" FontSize="16"/>
+                        <CheckBox IsChecked="{Binding IsDiscount}"></CheckBox>
+                    </StackPanel>
+                    <Label Content="End of the discount:" Margin="0 15 0 0" Foreground="#FF314EB0" Padding="0" FontSize="16"/>
+                    <DatePicker Name="dateEnd" Padding="2" Height="40" BorderBrush="#FF314EB0" 
+                      BorderThickness="2" Foreground="#FF314EB0" FontSize="16"
+                        Focusable="False" IsEnabled="{Binding IsDiscount}"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="15 0" Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical" Margin="0 0 75 0">
-                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageCommand}"  >
+                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageProductCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
@@ -65,7 +91,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Name="remove" Visibility="Hidden" Grid.Column="1" Width="100" Margin="0 20 0 0" Command="{Binding RemoveImageCommand}"  >
+                <Button Name="remove" Visibility="Hidden" Grid.Column="1" Width="100" Margin="0 20 0 0" Command="{Binding RemoveImageProductCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
@@ -85,11 +111,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="40 10" Command="{Binding SignUpConfirmCommand}">
+            <Button Grid.Column="0" Margin="40 10" Command="{Binding AddProductConfirmCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Border CornerRadius="10" Background="#FFF4F3C3" BorderBrush="{x:Null}">
-                            <TextBlock Text="Sign Up" Foreground="#FF314EB0" 
+                            <TextBlock Text="Add" Foreground="#FF314EB0" 
                                            HorizontalAlignment="Center"                                           
                                            Margin="0,5,0,0"
                                            FontSize="16"></TextBlock>
