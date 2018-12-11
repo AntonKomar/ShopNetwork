@@ -12,7 +12,7 @@ namespace ShopNetwork.DAL.Models
     {
         [Key]
         public int NewID { get; set; }
-        [MaxLength(20)]
+        
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }

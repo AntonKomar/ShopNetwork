@@ -17,20 +17,32 @@ namespace ShopNetwork.UI.ViewModels
         private readonly ProductRepository _productRepository;
         private readonly GroupRepository _groupRepository;
         private readonly SubGroupRepository _subGroupRepository;
+        private readonly CartRepository _cartRepository;
+        private readonly AdminRepository _adminRepository;
+        private readonly PersonRepository _personRepository;
         private Group _selectedGroup;
         private SubGroup _selectedSubGroup;
         private CatalogView _catalogView;
         private ObservableCollection<SubGroup> _sub;
         private ObservableCollection<Product> _products;
+        private MainViewModel _mainViewModel;
+
+
+        private RelayCommand _addToCartCommand;
 
         public CatalogViewModel(ProductRepository productRepository, GroupRepository groupRepository,
-            SubGroupRepository subGroupRepository, CatalogView catalogView)
+            SubGroupRepository subGroupRepository, CartRepository cartRepository, AdminRepository adminRepository,
+            PersonRepository personRepository, CatalogView catalogView, MainViewModel mainViewModel)
         {
             _productRepository = productRepository;
             _groupRepository = groupRepository;
             _subGroupRepository = subGroupRepository;
+            _cartRepository = cartRepository;
+            _adminRepository = adminRepository;
+            _personRepository = personRepository;
             _catalogView = catalogView;
-            _products = new ObservableCollection<Product>(_productRepository.GetWithInclude(x => x.PictureID, x => x.Discount, x => x.SubGroup));
+            _products = new ObservableCollection<Product>(_productRepository.GetWithInclude(x => x.PictureID, x => x.Discount, x => x.SubGroup, x => x.Carts));
+            _mainViewModel = mainViewModel;
         }
 
         #region Properties
@@ -110,11 +122,105 @@ namespace ShopNetwork.UI.ViewModels
 
         #endregion
 
-
-
         #region Commands
 
+        public void AddToCart(object sender)
+        {
+            if (_mainViewModel.SignInUser == default)
+            {
+                SignInDialogView s = new SignInDialogView();
+                s.DataContext = _mainViewModel;
+                s.ShowDialog();
+            }
+            else
+            {
+                if (_cartRepository?.Get()
+                        .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
+                        .SingleOrDefault() == null)
+                {
+                    Cart cart = new Cart();
+                    cart.Date = DateTime.Now;
 
+                    if(cart.Products == null)
+                        cart.Products = new List<Product>();
+                    //string ProdId = 
+                    //Product product = _productRepository.Get().Where(x => x.ProdID == int.TryParse(sender,out int res));
+                    cart.Products.Add(Product);
+
+                    if(_mainViewModel.SignInUser.Carts == null)
+                        _mainViewModel.SignInUser.Carts = new List<Cart>();
+
+                    _mainViewModel.SignInUser.Carts.Add(cart);
+
+                    if(Product?.Carts == null)
+                        Product.Carts = new List<Cart>();
+
+                    Product?.Carts.Add(cart);
+
+                    if (_mainViewModel.IsAdmin)
+                        _adminRepository.Update((Admin) _mainViewModel.SignInUser);
+                    else
+                        _personRepository.Update((Person) _mainViewModel.SignInUser);
+
+                    _cartRepository.Create(cart);
+                    _productRepository.Update(Product);
+                }
+                else
+                {
+                    Cart cart = _cartRepository.GetWithInclude(x => x.Products)
+                        .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
+                        .SingleOrDefault();
+                    cart.Products.Add(Product);
+
+                    _cartRepository.Update(cart);
+                }
+            }
+        }
+
+        public RelayCommand AddToCartCommand
+        {
+            get
+            {
+                return _addToCartCommand ??
+                       (_addToCartCommand = new RelayCommand(obj =>
+                       {
+                           if (_mainViewModel.SignInUser == default)
+                           {
+                               new SignInDialogView().ShowDialog();
+                           }
+                           else
+                           {
+                               if (_cartRepository.Get()
+                                       .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
+                                       .SingleOrDefault() == null)
+                               {
+                                   Cart cart = new Cart();
+                                   cart.Date = DateTime.Now;
+                                   cart.Products.Add(Product);
+                                   _mainViewModel.SignInUser.Carts.Add(cart);
+                                   Product.Carts.Add(cart);
+
+                                   if (_mainViewModel.IsAdmin)
+                                       _adminRepository.Update((Admin)_mainViewModel.SignInUser);
+                                   else
+                                       _personRepository.Update((Person)_mainViewModel.SignInUser);
+
+                                   _cartRepository.Create(cart);
+                                   _productRepository.Update(Product);
+                               }
+                               else
+                               {
+                                   Cart cart = _cartRepository.GetWithInclude(x => x.Products)
+                                       .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
+                                       .SingleOrDefault();
+                                   cart.Products.Add(Product);
+
+                                   _cartRepository.Update(cart);
+                               }
+                           }
+                       }));
+            }
+        }
 
         #endregion
     }

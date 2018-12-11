@@ -24,5 +24,6 @@ namespace ShopNetwork.UI.Views
         {
             InitializeComponent();
         }
+
     }
 }

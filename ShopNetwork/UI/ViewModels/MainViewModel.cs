@@ -7,6 +7,7 @@ using ShopNetwork.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,8 @@ namespace ShopNetwork.UI.ViewModels
         private readonly AdminRepository _adminRepository;
         private readonly DiscountRepository _discountRepository;
         private readonly ProductRepository _productRepository;
+        private readonly NewsRepository _newsRepository;
+        private readonly CartRepository _cartRepository;  
         
         private Group _selectedGroup;
         private ObservableCollection<SubGroup> _sub;
@@ -38,7 +41,6 @@ namespace ShopNetwork.UI.ViewModels
         private string _imagePath;
         private string _imageName;
         private const string DestPath = @"C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\";
-        private bool _isAdmin;
         private bool _isDiscount;
         private User _signInUser;
 
@@ -68,6 +70,8 @@ namespace ShopNetwork.UI.ViewModels
         private RelayCommand _removeImageProductCommand;
         private RelayCommand _addNewsCommand;
         private RelayCommand _addNewsConfirmCommand;
+        private RelayCommand _removeImageNewsCommand;
+        private RelayCommand _chooseImageNewsCommand;
         private RelayCommand _addStoreCommand;
         private RelayCommand _addStoreConfirmCommand;
         #endregion
@@ -84,9 +88,12 @@ namespace ShopNetwork.UI.ViewModels
             _adminRepository = new AdminRepository(dbCont);
             _discountRepository = new DiscountRepository(dbCont);
             _productRepository = new ProductRepository(dbCont);
+            _newsRepository = new NewsRepository(dbCont);
         }
 
         #region Properties
+
+        public bool IsAdmin { get; set; }
 
         public ObservableCollection<Group> Groups => new ObservableCollection<Group>(_groupRepository.GetWithInclude(x => x.SubGroups));
 
@@ -208,7 +215,10 @@ namespace ShopNetwork.UI.ViewModels
             {
                 return _windowLoaded ?? (_windowLoaded = new RelayCommand(obj =>
                     {
-                        _mainWindow.ContentArea.Content = new NewsView();
+                        NewsView news = new NewsView();
+                        news.DataContext = new NewsViewModel(_newsRepository);
+                        _mainWindow.ContentArea.Content = news;
+
                         DispatcherTimer dispatcherTimer = new DispatcherTimer();
                         dispatcherTimer.Tick += new EventHandler((object sender,EventArgs e) => 
                         {
@@ -247,7 +257,7 @@ namespace ShopNetwork.UI.ViewModels
                     if (SignInUser == default)
                     {
                         SignInDialogView signInView = Application.Current.Windows.OfType<SignInDialogView>().FirstOrDefault();
-                        User user = (from c in _adminRepository.Get()
+                        User user = (from c in _adminRepository.GetWithInclude(x => x.Carts)
                                      where c.Email == signInView.email.Text
                                      select c).FirstOrDefault();
 
@@ -256,7 +266,7 @@ namespace ShopNetwork.UI.ViewModels
                             signInView.Close();
                             SignInUser = user;
                             _mainWindow.user.Content = "Admin";
-                            _isAdmin = true;
+                            IsAdmin = true;
                             _mainWindow.signIn.Visibility = Visibility.Collapsed;
                             _mainWindow.signUp.Visibility = Visibility.Collapsed;
                             _mainWindow.signOut.Visibility = Visibility.Visible;
@@ -267,7 +277,7 @@ namespace ShopNetwork.UI.ViewModels
                         }
                         else
                         {
-                            User user1 = (from c in _personRepository.Get()
+                            User user1 = (from c in _personRepository.GetWithInclude(x=>x.Carts)
                                           where c.Email == signInView.email.Text
                                           select c).FirstOrDefault();
                             if (user1 != null && signInView.password.Password == user1.Password)
@@ -275,7 +285,7 @@ namespace ShopNetwork.UI.ViewModels
                                 signInView.Close();
                                 SignInUser = user1;
                                 _mainWindow.user.Content = user1.Name;
-                                _isAdmin = false;
+                                IsAdmin = false;
                                 _mainWindow.signIn.Visibility = Visibility.Collapsed;
                                 _mainWindow.signUp.Visibility = Visibility.Collapsed;
                                 _mainWindow.signOut.Visibility = Visibility.Visible;
@@ -365,7 +375,7 @@ namespace ShopNetwork.UI.ViewModels
                     user.Email = signUpView.email.Text;
                     user.Phone = signUpView.phone.Text;
                     user.Password = signUpView.password.Password;
-                    if (_isAdmin == true)
+                    if (IsAdmin == true)
                         _adminRepository.Create((Admin)user);
                     else
                         _personRepository.Create((Person)user);
@@ -493,15 +503,31 @@ namespace ShopNetwork.UI.ViewModels
                         switch ((obj as ListViewItem).Name)
                         {
                             case "News":
-                                _mainWindow.ContentArea.Content = new NewsView();
+                                NewsView news = new NewsView();
+                                news.DataContext = new NewsViewModel(_newsRepository);
+                                _mainWindow.ContentArea.Content = news;
                                 break;
                             case "Catalog":
-                                CatalogView catalog = new CatalogView();
-                                catalog.DataContext = new CatalogViewModel(_productRepository,_groupRepository,_subGroupRepository, catalog);
+                                CatalogViewModel vm = new CatalogViewModel(_productRepository, _groupRepository, _subGroupRepository,
+                                    _cartRepository, _adminRepository, _personRepository, null, this);
+                                CatalogView catalog = new CatalogView(vm);
+                                catalog.DataContext = new CatalogViewModel(_productRepository,_groupRepository,_subGroupRepository,
+                                    _cartRepository, _adminRepository, _personRepository, catalog, this);
                                 _mainWindow.ContentArea.Content = catalog;
                                 break;
                             case "Cart":
-                                _mainWindow.ContentArea.Content = new CartView();
+                                if (SignInUser != null)
+                                {
+                                    CartView cart = new CartView();
+                                    cart.DataContext = new CartViewModel(_cartRepository, this);
+                                    _mainWindow.ContentArea.Content = cart;
+                                }
+                                else
+                                {
+                                    SignInDialogView s = new SignInDialogView();
+                                    s.DataContext = this;
+                                    s.ShowDialog();
+                                }
                                 break;
                             case "Stores":
                                 _mainWindow.ContentArea.Content = new OurStoresView();
@@ -526,6 +552,7 @@ namespace ShopNetwork.UI.ViewModels
         #endregion
 
         #region ProductDialog
+
         public RelayCommand AddProductCommand
         {
             get
@@ -617,6 +644,8 @@ namespace ShopNetwork.UI.ViewModels
 
         #endregion
 
+        #region News Dialog
+
         public RelayCommand AddNewsCommand
         {
             get
@@ -629,6 +658,71 @@ namespace ShopNetwork.UI.ViewModels
                     }));
             }
         }
+
+        public RelayCommand AddNewsConfirmCommand
+        {
+            get
+            {
+                return _addNewsConfirmCommand ??
+                       (_addNewsConfirmCommand = new RelayCommand(obj =>
+                       {
+                           AddNewsDialog addNewsDialog = Application.Current.Windows.OfType<AddNewsDialog>().FirstOrDefault();
+                           New news = new New();
+
+                           if (_imagePath != null)
+                           {
+                               System.IO.File.Copy(_imagePath, DestPath + @"News\" + _imageName, true);
+                               Picture picture = new Picture();
+                               picture.FilePath = DestPath + @"News\" + _imageName;
+                               _pictureRepository.Create(picture);
+                               news.PictureID = picture;
+                           }
+
+                           news.Name = addNewsDialog?.name.Text;
+                           news.Description = addNewsDialog?.descript.Text;
+                           news.Date = DateTime.Now;
+
+                           _newsRepository.Create(news);
+                           
+                           addNewsDialog.Close();
+                       }));
+            }
+        }
+
+        public RelayCommand ChooseImageNewsCommand
+        {
+            get
+            {
+                return _chooseImageNewsCommand ?? (_chooseImageNewsCommand = new RelayCommand(obj =>
+                {
+                    AddNewsDialog addNewsDialog = Application.Current.Windows.OfType<AddNewsDialog>().FirstOrDefault();
+
+                    if (ChooseImage())
+                    {
+                        addNewsDialog.image.Source = new BitmapImage(new Uri(_imagePath));
+                        addNewsDialog.remove.Visibility = Visibility.Visible;
+                    }
+                }));
+            }
+        }
+
+        public RelayCommand RemoveImageNewsCommand
+        {
+            get
+            {
+                return _removeImageNewsCommand ??
+                       (_removeImageProductCommand = new RelayCommand(obj =>
+                       {
+                           AddProductDialog addNewsDialog = Application.Current.Windows.OfType<AddProductDialog>().FirstOrDefault();
+                           addNewsDialog.image.Source = null;
+                           _imagePath = null;
+                           _imageName = null;
+                           addNewsDialog.remove.Visibility = Visibility.Hidden;
+                       }));
+            }
+        }
+
+        #endregion
 
         public RelayCommand AddStoreCommand
         {

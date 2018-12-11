@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:ShopNetwork.UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="CartView" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <Grid Background="White">
+        <ListBox Foreground="#FF0D69CD" ItemsSource="{Binding ElementName = Carts, Path=Date}" SelectedItem="{Binding SelectedCart}"
+                 HorizontalAlignment="Left" Height="392" Margin="23,27,0,0" VerticalAlignment="Top" Width="281" BorderBrush="#FF0D69CD"/>
+        <ListBox Foreground="#FF0D69CD" HorizontalAlignment="Left" Height="392" Margin="342,27,0,0" ItemsSource="{Binding CartProducts}"
+                 VerticalAlignment="Top" Width="424" BorderBrush="#FF0D69CD"/>
     </Grid>
 </UserControl>

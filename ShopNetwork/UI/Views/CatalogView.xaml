@@ -57,7 +57,7 @@
                         <TextBlock Foreground="White" FontSize="16" Text=" UAH"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Bottom">
-                        <Button Name="Add" Width="35" Height="35" HorizontalAlignment="Right" Command="{Binding AddToCartCommand }">
+                        <Button Name="Add" Width="35" Height="35" HorizontalAlignment="Right" Click="Product_OnClick" Tag="{Binding Path=ProdID}">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border CornerRadius="10" Background="#FF2BD400" BorderBrush="{x:Null}">
@@ -102,7 +102,7 @@
         <ListBox Grid.Row="1" x:Name="ProductsList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsPanel="{StaticResource ListPanelTemplate}" ItemTemplate="{StaticResource ListTemplate}"
                  ItemsSource="{Binding Products, NotifyOnSourceUpdated=True}"
-                 SelectedItem="{Binding Product, NotifyOnSourceUpdated=True}"/>
+                 SelectedItem="{Binding Product, Mode=TwoWay, NotifyOnSourceUpdated=True}"/>
 
     </Grid>
 

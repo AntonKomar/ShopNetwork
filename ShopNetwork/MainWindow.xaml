@@ -22,7 +22,7 @@
 
     <Grid Grid.ZIndex="3">
         <Grid.Effect>
-            <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="1"/>
+            <DropShadowEffect BlurRadius="5" Direction="-90" RenderingBias="Quality" ShadowDepth="1"/>
         </Grid.Effect>
         
         <Grid.ColumnDefinitions>
@@ -137,7 +137,7 @@
                         <TextBlock Text="Cart" Margin="10" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem x:Name="Stores" Height="60">
+                <ListViewItem x:Name="Stores" Height="60" Visibility="Collapsed">
                     <Grid Width="200">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" VerticalAlignment="Center" 

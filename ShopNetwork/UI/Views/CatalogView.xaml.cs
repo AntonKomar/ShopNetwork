@@ -21,9 +21,17 @@ namespace ShopNetwork.UI.Views
     /// </summary>
     public partial class CatalogView : UserControl
     {
-        public CatalogView()
+        private CatalogViewModel _vm;
+
+        public CatalogView(CatalogViewModel vm)
         {
             InitializeComponent();
+            _vm = vm;
+        }
+
+        private void Product_OnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            _vm.AddToCart(sender);
         }
     }
 }
