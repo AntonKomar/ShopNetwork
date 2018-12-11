@@ -13,7 +13,6 @@ namespace ShopNetwork.DAL.Models
         public int SubGroupID { get; set; }
         [MaxLength(20)]
         public string Name { get; set; }
-
-        public List<Product> Products { get; set; }
+        
     }
 }

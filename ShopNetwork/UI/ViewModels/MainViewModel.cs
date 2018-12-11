@@ -185,19 +185,18 @@ namespace ShopNetwork.UI.ViewModels
         /// <returns></returns>
         private bool ChooseImage()
         {
-            bool res = false;
             var openDialog = new OpenFileDialog();
             openDialog.Filter = "Image files (*.BMP, *.JPG, *.GIF, *.TIF, *.PNG, *.ICO, *.EMF, *.WMF)|*.bmp;" +
                                 "*.jpg;*.gif; *.tif; *.png; *.ico; *.emf; *.wmf";
             _imageName = null;
             _imagePath = null;
-            if (openDialog.ShowDialog() == true)
+            if(openDialog.ShowDialog() == true)
             {
                 _imageName = openDialog.SafeFileName;
                 _imagePath = openDialog.FileName;
-                res = true;
+                return true;
             }
-            return res;
+            return false;
         }
 
         #region Commands
@@ -312,9 +311,8 @@ namespace ShopNetwork.UI.ViewModels
                     (_chooseImageCommand = new RelayCommand(obj =>
                     {
                         SignUpDialogView signUpView = Application.Current.Windows.OfType<SignUpDialogView>().FirstOrDefault();
-
-                        bool res = ChooseImage();
-                        if (res)
+                        
+                        if (ChooseImage())
                         {
                             signUpView.image.Source = new BitmapImage(new Uri(_imagePath));
                             signUpView.remove.Visibility = Visibility.Visible;
@@ -498,7 +496,9 @@ namespace ShopNetwork.UI.ViewModels
                                 _mainWindow.ContentArea.Content = new NewsView();
                                 break;
                             case "Catalog":
-                                _mainWindow.ContentArea.Content = new CatalogView();
+                                CatalogView catalog = new CatalogView();
+                                catalog.DataContext = new CatalogViewModel(_productRepository,_groupRepository,_subGroupRepository, catalog);
+                                _mainWindow.ContentArea.Content = catalog;
                                 break;
                             case "Cart":
                                 _mainWindow.ContentArea.Content = new CartView();
@@ -553,7 +553,7 @@ namespace ShopNetwork.UI.ViewModels
                         {
                             System.IO.File.Copy(_imagePath, DestPath+ @"Products\" + _imageName, true);
                             Picture picture = new Picture();
-                            picture.FilePath = DestPath + _imageName;
+                            picture.FilePath = DestPath+ @"Products\"+ _imageName;
                             _pictureRepository.Create(picture);
                             product.PictureID = picture;
                         }
@@ -567,11 +567,13 @@ namespace ShopNetwork.UI.ViewModels
                             _discountRepository.Create(discount);
                             product.Discount = discount;
                         }
+
                         product.Name = addProductDialog.name.Text;
                         product.Description = addProductDialog.descript.Text;
                         product.UnityOfMeasurement = (Unity) addProductDialog.unity.SelectedValue;
                         product.Price = int.TryParse(addProductDialog.price.Text, out int result1) ? result1 : default;
                         product.Quontity = int.TryParse(addProductDialog.quontity.Text, out int result2) ? result2 : default;
+                        product.SubGroup = (SubGroup)addProductDialog.subGroup.SelectedValue;
 
                         _productRepository.Create(product);
 
@@ -580,16 +582,15 @@ namespace ShopNetwork.UI.ViewModels
             }
         }
 
-        private RelayCommand ChooseImageProductCommand
+        public RelayCommand ChooseImageProductCommand
         {
             get
             {
                 return _chooseImageProductCommand ?? (_chooseImageProductCommand = new RelayCommand(obj =>
                 {
                     AddProductDialog addProductDialog = Application.Current.Windows.OfType<AddProductDialog>().FirstOrDefault();
-
-                    bool res = ChooseImage();
-                    if (res)
+                    
+                    if (ChooseImage())
                     {
                         addProductDialog.image.Source = new BitmapImage(new Uri(_imagePath));
                         addProductDialog.remove.Visibility = Visibility.Visible;

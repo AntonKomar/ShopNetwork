@@ -28,6 +28,7 @@ namespace ShopNetwork.DAL.Models
         public int Quontity { get; set; }
         public Discount Discount { get; set; }
         public Unity UnityOfMeasurement { get; set; }
+        public SubGroup SubGroup { get; set; }
         
         public List<Market> Markets { get; set; }
         public List<Cart> Carts { get; set; }

@@ -111,6 +111,10 @@
     <Compile Include="Migrations\201812021821516_Rename discount to Discount.Designer.cs">
       <DependentUpon>201812021821516_Rename discount to Discount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812110037250_EditSubGroup.cs" />
+    <Compile Include="Migrations\201812110037250_EditSubGroup.Designer.cs">
+      <DependentUpon>201812110037250_EditSubGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="UI\ViewModels\AboutUsViewModel.cs" />
     <Compile Include="UI\ViewModels\CartViewModel.cs" />
@@ -310,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812021821516_Rename discount to Discount.resx">
       <DependentUpon>201812021821516_Rename discount to Discount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812110037250_EditSubGroup.resx">
+      <DependentUpon>201812110037250_EditSubGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

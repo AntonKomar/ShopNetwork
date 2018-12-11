@@ -79,7 +79,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="15 0" Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical" Margin="0 0 75 0">
-                <Button Grid.Column="1" Width="100" Command="{Binding ChooseImageProductCommand}"  >
+                <Button Width="100" Command="{Binding ChooseImageProductCommand}"  >
                     <Button.Template>
                         <ControlTemplate>
                             <Border  CornerRadius="10" Background="#FF314EB0" BorderBrush="{x:Null}">
