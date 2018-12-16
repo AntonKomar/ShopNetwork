@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ShopNetwork</RootNamespace>
     <AssemblyName>ShopNetwork</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +54,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,17 +74,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DAL\ObservableObject.cs" />
-    <Compile Include="DAL\Repositories\AdminRepository.cs" />
-    <Compile Include="DAL\Repositories\CartRepository.cs" />
-    <Compile Include="DAL\Repositories\DiscountRepository.cs" />
-    <Compile Include="DAL\Repositories\GroupRepository.cs" />
-    <Compile Include="DAL\Repositories\PictureRepository.cs" />
-    <Compile Include="DAL\Repositories\MarketRepository.cs" />
-    <Compile Include="DAL\Repositories\NewsRepository.cs" />
-    <Compile Include="DAL\Repositories\PersonRepository.cs" />
-    <Compile Include="DAL\Repositories\ProductRepository.cs" />
-    <Compile Include="DAL\Repositories\SubGroupRepository.cs" />
     <Compile Include="Migrations\201810301130247_LittleChange.cs" />
     <Compile Include="Migrations\201810301130247_LittleChange.Designer.cs">
       <DependentUpon>201810301130247_LittleChange.cs</DependentUpon>
@@ -159,10 +150,6 @@
     <Compile Include="UI\Views\SignUpDialogView.xaml.cs">
       <DependentUpon>SignUpDialogView.xaml</DependentUpon>
     </Compile>
-    <Page Include="DAL\Resources\lang.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -171,7 +158,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DAL\Context\ShopNetworkContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -251,19 +237,6 @@
       <DependentUpon>201810161431488_EditAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="DAL\Models\Admin.cs" />
-    <Compile Include="DAL\Models\Cart.cs" />
-    <Compile Include="DAL\Models\Discount.cs" />
-    <Compile Include="DAL\GenericRepository.cs" />
-    <Compile Include="DAL\Abstract\IGenericRepository.cs" />
-    <Compile Include="DAL\Models\Group.cs" />
-    <Compile Include="DAL\Models\Picture.cs" />
-    <Compile Include="DAL\Models\Market.cs" />
-    <Compile Include="DAL\Models\New.cs" />
-    <Compile Include="DAL\Models\Person.cs" />
-    <Compile Include="DAL\Models\Product.cs" />
-    <Compile Include="DAL\Models\SubGroup.cs" />
-    <Compile Include="DAL\Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -339,15 +312,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAL\Resources\Images\News\" />
-    <Folder Include="DAL\Resources\Images\Products\" />
-    <Folder Include="DAL\Resources\Images\Users\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="DAL\Resources\Images\завантаження.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="DAL\Resources\Images\Default\no-photo-available.png" />
+    <ProjectReference Include="..\ShopNetwork.DalPart\ShopNetwork.DalPart.csproj">
+      <Project>{1af597c2-aeda-4d9d-9b58-fc5cb41e3634}</Project>
+      <Name>ShopNetwork.DalPart</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopNetwork.Interfaces\ShopNetwork.Interfaces.csproj">
+      <Project>{f0817a0d-192b-468e-bd3e-88d2002d1d19}</Project>
+      <Name>ShopNetwork.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

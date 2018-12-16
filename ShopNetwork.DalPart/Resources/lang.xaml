@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:ShopNetwork.DalPart.Resources">
+
+    <v:String x:Key="AboutUs">About company</v:String>
+    <v:String x:Key="AboutUs1">"Shop Network" is the enterprise of ATB Corporation - the largest, dynamically developing network of Ukraine.</v:String>
+    <v:String x:Key="AboutUs2">Shop Network was founded in 1993, when Agrotech business stores laid the foundation for the development of the ATB discounter network. Already in the 2000s, the Shop Network for the first time in Ukraine introduces a new self-service system in the discounter format. Discounter - a store with a wide range of products at wholesale prices. In combination with a convenient location and high quality products, this format is most consistent with the priorities of consumers.</v:String>
+    <v:String x:Key="AboutUs3">For a quarter of a century, the company has grown into the largest national retail chain. Today, the Shop Network retail chain has more than 900 stores in 237 locations in 22 regions of Ukraine and continues to show high growth rates. Modern approaches to the development of marketing strategy, logistics, quality control of food products and customer service have provided the company with leading positions in the country's trade industry, both in the number of buyers and turnover, tax expenses.</v:String>
+    <v:String x:Key="AboutUs4">The range of stores consists of more than 3,500 products, of which more than 800 represent their own trademarks, “Shop Network”. By minimizing the cost of logistics and advertising, the cost of such products is lower than the market average, but the quality is not inferior to well-known brands.</v:String>
+</ResourceDictionary>
+    
+    

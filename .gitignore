@@ -267,3 +267,4 @@ __pycache__/
 *.pyc
 /ShopNetwork/DAL/Resources/Images/Products
 /ShopNetwork/DAL/Resources/Images/News
+/ShopNetwork.DalPart/Resources/Images

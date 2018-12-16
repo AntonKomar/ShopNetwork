@@ -1,13 +1,12 @@
-﻿using System;
+﻿using ShopNetwork.DalPart;
+using ShopNetwork.DalPart.Models;
+using ShopNetwork.DalPart.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShopNetwork.DAL;
-using ShopNetwork.DAL.Context;
-using ShopNetwork.DAL.Models;
-using ShopNetwork.DAL.Repositories;
 
 namespace ShopNetwork.UI.ViewModels
 {

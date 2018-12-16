@@ -1,6 +1,4 @@
-﻿using ShopNetwork.DAL.Context;
-using ShopNetwork.DAL.Repositories;
-using ShopNetwork.UI.ViewModels;
+﻿using ShopNetwork.UI.ViewModels;
 using System.Windows;
 
 namespace ShopNetwork.UI.Views

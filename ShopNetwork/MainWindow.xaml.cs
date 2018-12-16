@@ -1,10 +1,11 @@
-﻿
-using ShopNetwork.DAL.Context;
-using ShopNetwork.DAL.Repositories;
+﻿using ShopNetwork.DalPart.Context;
+using ShopNetwork.DalPart.Models;
+using ShopNetwork.Interfaces;
 using ShopNetwork.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +31,14 @@ namespace ShopNetwork
             ShopNetworkContext dbCont = new ShopNetworkContext();
             InitializeComponent();
             
+
+            ChannelFactory<IWcfPictureService> channelFactory = new
+                ChannelFactory<IWcfPictureService>("PictureService");
+
+            IWcfPictureService proxy = channelFactory.CreateChannel();
+
+            List<Picture> pictures = proxy.GetAllPictures();
+
             DataContext = new MainViewModel(dbCont);
         } 
     }

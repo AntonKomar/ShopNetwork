@@ -1,13 +1,12 @@
 ﻿using Microsoft.Win32;
-using ShopNetwork.DAL;
-using ShopNetwork.DAL.Context;
-using ShopNetwork.DAL.Models;
-using ShopNetwork.DAL.Repositories;
+using ShopNetwork.DalPart;
+using ShopNetwork.DalPart.Context;
+using ShopNetwork.DalPart.Models;
+using ShopNetwork.DalPart.Repositories;
 using ShopNetwork.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace ShopNetwork.UI.ViewModels
 
         private string _imagePath;
         private string _imageName;
-        private const string DestPath = @"C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DAL\Resources\Images\";
+        private const string DestPath = @"C:\Users\Anton\source\repos\ShopNetwork\ShopNetwork\DalPart\Resources\Images\";
         private bool _isDiscount;
         private User _signInUser;
 
