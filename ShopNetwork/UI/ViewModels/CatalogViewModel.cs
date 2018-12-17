@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using ShopNetwork.DalPart;
 using ShopNetwork.DalPart.Models;
 using ShopNetwork.DalPart.Repositories;
@@ -13,7 +14,6 @@ namespace ShopNetwork.UI.ViewModels
 {
     public class CatalogViewModel : ObservableObject 
     {
-        private Product _product;
         private readonly ProductRepository _productRepository;
         private readonly GroupRepository _groupRepository;
         private readonly SubGroupRepository _subGroupRepository;
@@ -26,9 +26,6 @@ namespace ShopNetwork.UI.ViewModels
         private ObservableCollection<SubGroup> _sub;
         private ObservableCollection<Product> _products;
         private MainViewModel _mainViewModel;
-
-
-        private RelayCommand _addToCartCommand;
 
         public CatalogViewModel(ProductRepository productRepository, GroupRepository groupRepository,
             SubGroupRepository subGroupRepository, CartRepository cartRepository, AdminRepository adminRepository,
@@ -56,18 +53,6 @@ namespace ShopNetwork.UI.ViewModels
 
                 _products = value;
                 OnPropertyChanged("Products");
-            }
-        }
-
-        public Product Product
-        {
-            get{ return _product; }
-            set
-            {
-                if (_product == value) return;
-                
-                _product = value;
-                OnPropertyChanged("Product");
             }
         }
 
@@ -126,6 +111,7 @@ namespace ShopNetwork.UI.ViewModels
 
         public void AddToCart(object sender)
         {
+            //Check user
             if (_mainViewModel.SignInUser == default)
             {
                 SignInDialogView s = new SignInDialogView();
@@ -134,91 +120,67 @@ namespace ShopNetwork.UI.ViewModels
             }
             else
             {
+                //Get id of the product
+                int prodId = 0;
+                if (int.TryParse(((Button)sender).Tag.ToString(), out int res))
+                {
+                    prodId = res;
+                }
+                //Get the product by id
+                Product product = _productRepository.Get().Where(x => x.ProdID == prodId).SingleOrDefault();
+                
+                //check if there is already such cart or no
                 if (_cartRepository?.Get()
                         .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
                         .SingleOrDefault() == null)
                 {
+                    //Create a new cart
                     Cart cart = new Cart();
                     cart.Date = DateTime.Now;
+                    cart.Products = new List<Product>();
 
-                    if(cart.Products == null)
-                        cart.Products = new List<Product>();
-                    //string ProdId = 
-                    //Product product = _productRepository.Get().Where(x => x.ProdID == int.TryParse(sender,out int res));
-                    cart.Products.Add(Product);
+                    cart.Products.Add(product);
 
-                    if(_mainViewModel.SignInUser.Carts == null)
-                        _mainViewModel.SignInUser.Carts = new List<Cart>();
+                    //If product didn't have any carts we declare it and add a cart
+                    if(product?.Carts == null)
+                        product.Carts = new List<Cart>();
 
-                    _mainViewModel.SignInUser.Carts.Add(cart);
-
-                    if(Product?.Carts == null)
-                        Product.Carts = new List<Cart>();
-
-                    Product?.Carts.Add(cart);
-
+                    //update context of user - admin or person
                     if (_mainViewModel.IsAdmin)
-                        _adminRepository.Update((Admin) _mainViewModel.SignInUser);
+                        cart.AdminId = (Admin)_mainViewModel.SignInUser;
                     else
-                        _personRepository.Update((Person) _mainViewModel.SignInUser);
+                        cart.PersonId = (Person)_mainViewModel.SignInUser;
 
+                    product?.Carts.Add(cart);
+
+                    //create new cart and update product context
                     _cartRepository.Create(cart);
-                    _productRepository.Update(Product);
+                    _productRepository.Update(product);
                 }
                 else
                 {
                     Cart cart = _cartRepository.GetWithInclude(x => x.Products)
                         .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
                         .SingleOrDefault();
-                    cart.Products.Add(Product);
 
+                    cart.Products.Add(product);
+
+                    //If product didn't have any carts we declare it and add a cart
+                    if (product?.Carts == null)
+                        product.Carts = new List<Cart>();
+
+                    //update context of user - admin or person
+                    if (_mainViewModel.IsAdmin)
+                        cart.AdminId = (Admin)_mainViewModel.SignInUser;
+                    else
+                        cart.PersonId = (Person)_mainViewModel.SignInUser;
+
+                    product?.Carts.Add(cart);
+
+                    //create new cart and update product context
                     _cartRepository.Update(cart);
+                    _productRepository.Update(product);
                 }
-            }
-        }
-
-        public RelayCommand AddToCartCommand
-        {
-            get
-            {
-                return _addToCartCommand ??
-                       (_addToCartCommand = new RelayCommand(obj =>
-                       {
-                           if (_mainViewModel.SignInUser == default)
-                           {
-                               new SignInDialogView().ShowDialog();
-                           }
-                           else
-                           {
-                               if (_cartRepository.Get()
-                                       .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
-                                       .SingleOrDefault() == null)
-                               {
-                                   Cart cart = new Cart();
-                                   cart.Date = DateTime.Now;
-                                   cart.Products.Add(Product);
-                                   _mainViewModel.SignInUser.Carts.Add(cart);
-                                   Product.Carts.Add(cart);
-
-                                   if (_mainViewModel.IsAdmin)
-                                       _adminRepository.Update((Admin)_mainViewModel.SignInUser);
-                                   else
-                                       _personRepository.Update((Person)_mainViewModel.SignInUser);
-
-                                   _cartRepository.Create(cart);
-                                   _productRepository.Update(Product);
-                               }
-                               else
-                               {
-                                   Cart cart = _cartRepository.GetWithInclude(x => x.Products)
-                                       .Where(x => x.Date.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
-                                       .SingleOrDefault();
-                                   cart.Products.Add(Product);
-
-                                   _cartRepository.Update(cart);
-                               }
-                           }
-                       }));
             }
         }
 

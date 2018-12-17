@@ -34,7 +34,5 @@ namespace ShopNetwork.DalPart.Models
         [Required]
         [MaxLength(20)]
         public string Password { get; set; }
-
-        public List<Cart> Carts { get; set; }
     }
 }

@@ -88,6 +88,7 @@ namespace ShopNetwork.UI.ViewModels
             _discountRepository = new DiscountRepository(dbCont);
             _productRepository = new ProductRepository(dbCont);
             _newsRepository = new NewsRepository(dbCont);
+            _cartRepository = new CartRepository(dbCont);
         }
 
         #region Properties
@@ -256,7 +257,7 @@ namespace ShopNetwork.UI.ViewModels
                     if (SignInUser == default)
                     {
                         SignInDialogView signInView = Application.Current.Windows.OfType<SignInDialogView>().FirstOrDefault();
-                        User user = (from c in _adminRepository.GetWithInclude(x => x.Carts)
+                        User user = (from c in _adminRepository.Get()
                                      where c.Email == signInView.email.Text
                                      select c).FirstOrDefault();
 
@@ -276,7 +277,7 @@ namespace ShopNetwork.UI.ViewModels
                         }
                         else
                         {
-                            User user1 = (from c in _personRepository.GetWithInclude(x=>x.Carts)
+                            User user1 = (from c in _personRepository.Get()
                                           where c.Email == signInView.email.Text
                                           select c).FirstOrDefault();
                             if (user1 != null && signInView.password.Password == user1.Password)

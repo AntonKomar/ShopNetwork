@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201812111053233_Edition.Designer.cs">
       <DependentUpon>201812111053233_Edition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812171426237_Edit_Cart.cs" />
+    <Compile Include="Migrations\201812171426237_Edit_Cart.Designer.cs">
+      <DependentUpon>201812171426237_Edit_Cart.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="UI\ViewModels\AboutUsViewModel.cs" />
     <Compile Include="UI\ViewModels\CartViewModel.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812111053233_Edition.resx">
       <DependentUpon>201812111053233_Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812171426237_Edit_Cart.resx">
+      <DependentUpon>201812171426237_Edit_Cart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

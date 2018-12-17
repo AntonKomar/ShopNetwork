@@ -12,6 +12,8 @@ namespace ShopNetwork.DalPart.Models
         [Key]
         public int CartID { get; set; }
         public DateTime Date { get; set; }
+        public Admin AdminId { get; set; }
+        public Person PersonId { get; set; }
 
         public List<Product> Products { get; set; }
     }

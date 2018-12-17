@@ -47,7 +47,8 @@
                         </Button>
                     </StackPanel>
 
-                    <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Width="120" Height="120" Source="{Binding Path=PictureID.FilePath}" />
+                    <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Width="120" Height="120" 
+                           Source="{Binding Path=PictureID.FilePath}" />
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock Foreground="White" FontSize="16"  Text="{Binding Path=Name}"/>
@@ -57,7 +58,8 @@
                         <TextBlock Foreground="White" FontSize="16" Text=" UAH"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Bottom">
-                        <Button Name="Add" Width="35" Height="35" HorizontalAlignment="Right" Click="Product_OnClick" Tag="{Binding Path=ProdID}">
+                        <Button Name="Add" Width="35" Height="35" HorizontalAlignment="Right" 
+                                Click="Product_OnClick" Tag="{Binding Path=ProdID}">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border CornerRadius="10" Background="#FF2BD400" BorderBrush="{x:Null}">

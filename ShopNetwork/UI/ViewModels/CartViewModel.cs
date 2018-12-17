@@ -24,7 +24,19 @@ namespace ShopNetwork.UI.ViewModels
 
         public ObservableCollection<Cart> Carts
         {
-            get { return new ObservableCollection<Cart>(_mainViewModel.SignInUser.Carts); }
+            get
+            {
+                if (_mainViewModel.IsAdmin)
+                {
+                    return new ObservableCollection<Cart>(_cartRepository.GetWithInclude(x => x.Products));
+                   //new ObservableCollection<Cart>(_cartRepository.Get().Where(x => x.AdminId.AdminID == ((Admin)_mainViewModel.SignInUser).AdminID));
+                }
+                else
+                {
+                    return new ObservableCollection<Cart>(_cartRepository.GetWithInclude(x => x.Products));
+                    //new ObservableCollection<Cart>(_cartRepository.Get().Where(x => x.PersonId.PersonID == ((Person)_mainViewModel.SignInUser).PersonID));
+                }
+            }
         }
 
         public Cart SelectedCart
@@ -32,8 +44,11 @@ namespace ShopNetwork.UI.ViewModels
             get { return _selectedCart; }
             set
             {
+                if (_selectedCart == value) return;
+
                 _selectedCart = value;
                 OnPropertyChanged("SelectedCart");
+                OnPropertyChanged("CartProducts");
             }
         }
 
@@ -41,8 +56,8 @@ namespace ShopNetwork.UI.ViewModels
         {
             get
             {
-                return (SelectedCart != null) ? new ObservableCollection<Product>(SelectedCart.Products)
-                    : new ObservableCollection<Product>();
+                return (_selectedCart != null) ? new ObservableCollection<Product>(SelectedCart.Products)
+                    : new ObservableCollection<Product>(new List<Product>());
             }
         }
     }

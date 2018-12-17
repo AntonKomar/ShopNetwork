@@ -6,10 +6,23 @@
              xmlns:local="clr-namespace:ShopNetwork.UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="listTemplate">
+            <TextBlock Foreground="#FF0D69CD" Height="20" FontSize="16"  Text="{Binding Path=Date}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="prodTemplate">
+            <TextBlock Foreground="#FF0D69CD" Height="20" FontSize="16"  Text="{Binding Path=Name}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <Grid Background="White">
-        <ListBox Foreground="#FF0D69CD" ItemsSource="{Binding ElementName = Carts, Path=Date}" SelectedItem="{Binding SelectedCart}"
-                 HorizontalAlignment="Left" Height="392" Margin="23,27,0,0" VerticalAlignment="Top" Width="281" BorderBrush="#FF0D69CD"/>
-        <ListBox Foreground="#FF0D69CD" HorizontalAlignment="Left" Height="392" Margin="342,27,0,0" ItemsSource="{Binding CartProducts}"
+        <ListBox Foreground="#FF0D69CD" ItemsSource="{Binding Carts}" 
+                 SelectedItem="{Binding SelectedCart, Mode=OneWayToSource}" ItemTemplate="{StaticResource listTemplate}"
+                 HorizontalAlignment="Left" Height="413" Margin="23,27,0,0" VerticalAlignment="Top" 
+                 BorderThickness="3" Width="281" BorderBrush="#FF0D69CD"/>
+        <ListBox Foreground="#FF0D69CD" HorizontalAlignment="Left" Height="413" Margin="342,27,0,0" 
+                 ItemsSource="{Binding CartProducts}" BorderThickness="3" ItemTemplate="{StaticResource prodTemplate}"
                  VerticalAlignment="Top" Width="424" BorderBrush="#FF0D69CD"/>
     </Grid>
 </UserControl>
